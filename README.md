@@ -10,7 +10,7 @@ pxCore is a small opensource library that provides a portable framebuffer and wi
 
 In its design a few principles were followed:
 
-* Be Small – A simple windowed application can be built (on Windows) in as little as 8k.
+* Be small – A simple windowed application can be built (on Windows) in as little as 8k.
 * Be Simple – The framebuffer abstraction supports 32bpp framebuffers and is intended to be minimal yet complete.
 * Don’t tightly couple the framebuffer and windowing functionality. Some other framebuffer libraries (PixelToaster for one) don’t separate out the framebuffer abstraction from the windowing abstraction. By loosely coupling the two abstractions this library becomes much more valuable; as the framebuffer functionality can be used and integrated with other windowing toolkits easily thereby making YOUR code more reusable.
 * Platform native surface construction
