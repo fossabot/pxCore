@@ -5,7 +5,7 @@ pxCore is a small opensource library that provides a portable framebuffer and wi
 
 * 2d and 3d rasterizers
 * Transition Libraries
-* Filter Routines
+*  Filter Routines
 * Image Processing
 
 In its design a few principles were followed:
