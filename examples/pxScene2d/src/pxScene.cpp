@@ -256,9 +256,9 @@ protected:
     script.garbageCollect();
     if (gDumpMemUsage)
     {
-      rtLogInfo("pxobjectcount is [%d]",pxObjectCount);
+      rtLogInfo("pxobjectcount is [%d]\n",pxObjectCount);
 #ifndef PX_PLATFORM_DFB_NON_X11
-      rtLogInfo("texture memory usage is [%" PRId64 "]",context.currentTextureMemoryUsageInBytes());
+      rtLogInfo("texture memory usage is [%" PRId64 "]\n",context.currentTextureMemoryUsageInBytes());
 #endif
 // #ifdef PX_PLATFORM_MAC
 //       rtLogInfo("texture memory usage is [%lld]",context.currentTextureMemoryUsageInBytes());
