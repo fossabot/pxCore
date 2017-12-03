@@ -256,7 +256,7 @@ protected:
     script.garbageCollect();
     if (gDumpMemUsage)
     {
-    sleep(2);
+    sleep(5);
       rtLogInfo("pxobjectcount is [%d]\n",pxObjectCount);
 #ifndef PX_PLATFORM_DFB_NON_X11
       rtLogInfo("texture memory usage is [%" PRId64 "]\n",context.currentTextureMemoryUsageInBytes());
