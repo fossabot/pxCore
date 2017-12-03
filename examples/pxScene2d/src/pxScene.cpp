@@ -16,7 +16,7 @@
 
 */
 
-// main.cpp
+//  main.cpp
 
 #include "pxCore.h"
 #include "pxTimer.h"
