@@ -1,5 +1,5 @@
 
-px.configImport({"browser:" : /*px.getPackageBaseFilePath() + */ "browser/"});
+px.configImport({"browser:" : /* px.getPackageBaseFilePath() + */ "browser/"});
 
 
 px.import({ scene:      'px:scene.1.js',
@@ -20,7 +20,7 @@ px.import({ scene:      'px:scene.1.js',
 
   var myStretch = scene.stretch.STRETCH;
 
-  var fontRes   = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
+  //var fontRes   = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
 
   var bg        = scene.create({t:"image", parent: root, url:"browser/images/status_bg.png", stretchX: myStretch, stretchY: myStretch});
   var contentBG = scene.create({t:"rect",  parent: bg, x:10, y:60, fillColor: 0xffffffff, a: 0.05, draw: false});
