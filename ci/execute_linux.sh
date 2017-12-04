@@ -69,6 +69,8 @@ echo "Reproduction/How to fix: Follow steps locally: export PX_DUMP_MEMUSAGE=1;e
 exit 1;
 fi
 
+sleep 10;
+
 #check for pxobject leak ot texture leak
 grep "pxobjectcount is \[0\]" $EXECLOGS
 pxRetVal=$?
