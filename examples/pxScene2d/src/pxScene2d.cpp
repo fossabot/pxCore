@@ -457,6 +457,7 @@ pxObject::pxObject(pxScene2d* scene): rtObject(), mParent(NULL), mcx(0), mcy(0),
     ,mDrawableSnapshotForMask(), mMaskSnapshot(), mIsDisposed(false)
   {
     pxObjectCount++;
+    rtLogInfo(">>>>>>>>>>>>>>>>>>>>>pxObjectCount++ : %d\n", pxObjectCount);
     mScene = scene;
     mReady = new rtPromise;
     mEmit = new rtEmit;
@@ -474,6 +475,7 @@ pxObject::~pxObject()
     }
     mChildren.clear();
     pxObjectCount--;
+    rtLogInfo(">>>>>>>>>>>>>>>>>>>>>pxObjectCount-- : %d\n", pxObjectCount);
     rtValue nullValue;
     mReady.send("reject",nullValue);
     clearSnapshot(mSnapshotRef);
