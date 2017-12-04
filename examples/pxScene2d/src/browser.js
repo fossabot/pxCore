@@ -1,5 +1,5 @@
 
-px.configImport({"browser:" : /*px.getPackageBaseFilePath() + */ "browser/"});
+px.configImport({"browser:" : /* px.getPackageBaseFilePath() + */ "browser/"});
 
 
 px.import({ scene:      'px:scene.1.js',
