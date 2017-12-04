@@ -69,8 +69,11 @@ echo "Reproduction/How to fix: Follow steps locally: export PX_DUMP_MEMUSAGE=1;e
 exit 1;
 fi
 
+echo"sleeping for 10 secs before value check"
+date;
 sleep 10;
-
+echo ">>>>>>>>>awake"
+date;
 #check for pxobject leak ot texture leak
 grep "pxobjectcount is \[0\]" $EXECLOGS
 pxRetVal=$?
