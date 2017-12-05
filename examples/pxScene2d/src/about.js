@@ -27,7 +27,7 @@ px.import({ scene: 'px:scene.1.js' }).then( function importsAreReady(imports)
 
   var logo_url  = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/images/pxscene.png";
                                            
-//  var fontRes   = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
+  var fontRes   = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
   var panel     = scene.create({ t: "object",  parent: root, x: 40, y: -720, w: (max_w + 4), h: max_h, a: 0.0 });
   var panel_bg  = scene.create({ t: "rect",    parent: panel, fillColor: LIGHT_GRAY2, w: panel.w + 16, h: panel.h + 8, x: -8, y: -8});
   var rows      = scene.create({ t: "object",  parent: panel_bg, a: 1.0 });

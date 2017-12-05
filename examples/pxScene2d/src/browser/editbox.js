@@ -190,7 +190,7 @@ px.import({ scene: 'px:scene.1.js',
 
         var container = scene.create({ t: "object", parent: parent,    x: this._x, y: this._y, w: this._w, h: this._h });
         var clipRect  = scene.create({ t: "object", parent: container, x: 0,       y: 0,       w: this._w, h: this._h, clip: true} );
-        //var fontRes   = scene.create({ t: "fontResource",  url: font       });
+        var fontRes   = scene.create({ t: "fontResource",  url: font       });
         var inputRes  = scene.create({ t: "imageResource", url: params.url });
 
         var inputBg = scene.create({
