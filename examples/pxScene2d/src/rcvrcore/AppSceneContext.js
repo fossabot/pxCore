@@ -180,6 +180,7 @@ log.info(">>>>>>>>>>>>.. on cl0se request");
 
     this.innerscene.api = null;
     delete this.innerscene;
+    delete this.root;
     this.innerscene = null;
     this.sandbox.xmodule = null;
     this.sandbox.require = null;
