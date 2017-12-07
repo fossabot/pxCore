@@ -23,6 +23,9 @@
 
 #include "pxPath.h"
 
+#include <map>
+using namespace std;
+extern map<pxObject*, string> pxObjectCountDetails;
 
 extern pxContext context;
 
@@ -63,6 +66,7 @@ pxPath::pxPath(pxScene2d* scene): pxObject(scene),
 {
   mx = 0;
   my = 0;
+ pxObjectCountDetails[this] = "pxPath";
 /*
   pushFloat(123.456);
   

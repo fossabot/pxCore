@@ -52,7 +52,8 @@ using namespace std;
 
 #include <stdint.h>    // for PRId64
 #include <inttypes.h>  // for PRId64
-
+#include <map>
+using namespace std;
 #ifndef RUNINMAIN
 #define ENTERSCENELOCK() rtWrapperSceneUpdateEnter();
 #define EXITSCENELOCK()  rtWrapperSceneUpdateExit();
@@ -99,6 +100,7 @@ char** g_origArgv = NULL;
 #endif
 bool gDumpMemUsage = false;
 extern int pxObjectCount;
+extern map<pxObject* , string> pxObjectCountDetails;
 #ifdef HAS_LINUX_BREAKPAD
 static bool dumpCallback(const google_breakpad::MinidumpDescriptor& descriptor,
 void* context, bool succeeded) {
@@ -250,14 +252,21 @@ protected:
   #ifndef RUNINMAIN
    script.setNeedsToEnd(true);
   #endif
-  #ifdef ENABLE_DEBUG_MODE
-    free(g_origArgv);
-  #endif
-    script.garbageCollect();
-    if (gDumpMemUsage)
-    {
-    sleep(5);
-      rtLogInfo("pxobjectcount is [%d]\n",pxObjectCount);
+#ifdef ENABLE_DEBUG_MODE
+  free(g_origArgv);
+#endif
+  script.garbageCollect();
+  if (gDumpMemUsage)
+  {
+		
+	uint32_t siz = pxObjectCountDetails.size();
+	rtLogInfo("!*!*!*!*!*!*!size of the map is %d\n", siz);
+	  for (std:: map<pxObject* , string>:: iterator iter = pxObjectCountDetails.begin(); iter != pxObjectCountDetails.end(); iter++)
+	  {
+			  rtLogInfo("!*!*!*!*!*!*!*!*!*!!**!*pxObject is not deleted : %s\n", (iter->second).c_str());
+	  }
+
+	  rtLogInfo("pxobjectcount is [%d]\n",pxObjectCount);
 #ifndef PX_PLATFORM_DFB_NON_X11
       rtLogInfo("texture memory usage is [%" PRId64 "]\n",context.currentTextureMemoryUsageInBytes());
 #endif

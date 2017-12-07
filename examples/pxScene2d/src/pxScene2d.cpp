@@ -141,6 +141,9 @@ int pxObjectCount = 0;
 map<string, string> gWaylandAppsMap;
 map<string, string> gWaylandRegistryAppsMap;
 map<string, string> gPxsceneWaylandAppsMap;
+
+map<pxObject*, string> pxObjectCountDetails;
+
 static bool gWaylandAppsConfigLoaded = false;
 #define DEFAULT_WAYLAND_APP_CONFIG_FILE "./waylandregistry.conf"
 #define DEFAULT_ALL_APPS_CONFIG_FILE "./pxsceneappregistry.conf"
@@ -456,6 +459,7 @@ pxObject::pxObject(pxScene2d* scene): rtObject(), mParent(NULL), mcx(0), mcy(0),
 #endif //PX_DIRTY_RECTANGLES
     ,mDrawableSnapshotForMask(), mMaskSnapshot(), mIsDisposed(false)
   {
+	
     pxObjectCount++;
     rtLogInfo(">>>>>>>>>>>>>>>>>>>>>pxObjectCount++ : %d\n", pxObjectCount);
     mScene = scene;
@@ -471,10 +475,19 @@ pxObject::~pxObject()
     //rtLogDebug("**************** pxObject destroyed: %s\n",getMap()->className);
     for(vector<rtRef<pxObject> >::iterator it = mChildren.begin(); it != mChildren.end(); ++it)
     {
-      (*it)->mParent = NULL;  // setParent mutates the mChildren collection
+	    (*it)->mParent = NULL;  // setParent mutates the mChildren collection
     }
     mChildren.clear();
     pxObjectCount--;
+    for (std:: map<pxObject* , string>:: iterator iter = pxObjectCountDetails.begin(); iter != pxObjectCountDetails.end(); iter++)
+    {
+		
+	    if(iter->first == this)
+	    {
+		    pxObjectCountDetails.erase(iter);	
+		    rtLogInfo(">>>>>>>>>... pxObject deleted\n");
+	    }
+    } 
     rtLogInfo(">>>>>>>>>>>>>>>>>>>>>pxObjectCount-- : %d\n", pxObjectCount);
     rtValue nullValue;
     mReady.send("reject",nullValue);

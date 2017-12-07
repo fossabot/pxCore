@@ -34,6 +34,10 @@
 
 extern pxContext context;
 
+
+#include <map>
+using namespace std;
+extern map<pxObject*, string> pxObjectCountDetails;
 #ifdef USE_PERF_TIMERS
 #include "pxTimer.h"
 #endif
@@ -44,6 +48,7 @@ pxCanvas::pxCanvas(pxScene2d* scene): pxObject(scene)
 {
   mw = 1280;// scene->w();
   mh =  720;// scene->h();
+ pxObjectCountDetails[this] = "pxcanvas";
 }
 
 pxCanvas::~pxCanvas()
