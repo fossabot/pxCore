@@ -134,7 +134,7 @@ function AppSceneContext(params) { // container, innerscene, packageUrl) {
   this.sceneWrapper = null;
   this.timers = [];
   this.timerIntervals = [];
-
+log.info(">>>>>>>>>>>this.packageUrl : " + this.packageUrl);
   log.message(4, "[[[NEW AppSceneContext]]]: " + this.packageUrl);
 }
 
@@ -142,6 +142,7 @@ AppSceneContext.prototype.loadScene = function() {
   //log.info("loadScene() - begins    on ctx: " + getContextID() );
   var urlParts = url.parse(this.packageUrl, true);
   var fullPath = this.packageUrl;
+log.info(">>>>>>>>>>>>>fullPath : " + fullPath);
   if (fullPath.substring(0, 4) !== "http") {
     if( fullPath.charAt(0) === '.' ) {
       // local file system
@@ -160,6 +161,7 @@ if( fullPath !== null)
   this.loadPackage(fullPath);
 
 this.innerscene.on('onClose', function (e) {
+log.info(">>>>>>>>>>>>.. on cl0se request");	
     //clear the timers and intervals on close
     var ntimers = this.timers.length;
     for (var i=0; i<ntimers; i++)
@@ -177,6 +179,7 @@ this.innerscene.on('onClose', function (e) {
     }
 
     this.innerscene.api = null;
+    delete this.innerscene;
     this.innerscene = null;
     this.sandbox.xmodule = null;
     this.sandbox.require = null;
@@ -206,27 +209,34 @@ this.innerscene.on('onClose', function (e) {
   }.bind(this));
 
 if (false) {
+log.info(">>>>>>>>>>>>.. on false 1");
 if (false) {
+log.info(">>>>>>>>>>>>.. on false 2");
   // This no longer has access to the container
   this.container.on('onKeyDown', function (e) {
+log.info(">>>>>>>>>>>>.. on key down");
     log.message(2, "container(" + this.packageUrl + "): keydown:" + e.keyCode);
   }.bind(this));
 
 }
   this.innerscene.on('onKeyDown', function (e) {
     log.message(2, "innerscene(" + this.packageUrl + "): keydown:" + e.keyCode);
+log.info(">>>>>>>>>>>>.. on key down innerscene");
   }.bind(this));
 
   this.innerscene.root.on('onKeyDown', function (e) {
+log.info(">>>>>>>>>>>>.. on key down inner scene root");
     log.message(2, "innerscene root(" + this.packageUrl + "): keydown:" + e.keyCode);
   }.bind(this));
 }
 
 if (false) {
   // JRJRJR No longer get this event...
+log.info(">>>>>>>>>>>>.. on onComplete");
   this.innerscene.on('onComplete', function (e) {
 //    this.container = null;
     this.innerscene = null;
+log.info(">>>>>>>>>>>>.. on onComplete true");
     this.sandbox = null;
     for(var key in this.scriptMap) {
       this.scriptMap[key].scriptObject = null;
