@@ -59,6 +59,15 @@ void pxText::onInit()
   if( getFontResource() != NULL && getFontResource()->isFontLoaded()) {
     resourceReady("resolve");
   }
+for (std:: map<pxObject* , string>:: iterator iter = pxObjectCountDetails.begin(); iter != pxObjectCountDetails.end(); iter++)
+    {
+            if(iter->first == this)
+            {
+                        iter->second = iter->second + (getFontResource()->getUrl().cString());
+                        break;
+            }
+    }
+
 }
 rtError pxText::text(rtString& s) const { s = mText; return RT_OK; }
 
