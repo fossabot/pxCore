@@ -3101,7 +3101,15 @@ rtError pxSceneContainer::setUrl(rtString url)
   rtLogInfo("pxSceneContainer::setUrl(%s)",url.cString());
   // If old promise is still unfulfilled resolve it
   // and create a new promise for the context of this Url
-  mReady.send("resolve", this);
+  for (std:: map<pxObject* , string>:: iterator iter = pxObjectCountDetails.begin(); iter != pxObjectCountDetails.end(); iter++)
+    {
+            if(iter->first == this)
+            {
+                        iter->second = iter->second +"_"+ url.cString();
+			break;
+            }
+    } 
+ mReady.send("resolve", this);
   mReady = new rtPromise( std::string("pxSceneContainer >> ") + std::string(url) );
 
   mUrl = url;
