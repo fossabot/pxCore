@@ -80,6 +80,10 @@ class AsyncScriptInfo {
 
 #define MAX_URL_SIZE 8000
 
+
+#include <map>
+using namespace std;
+extern map<pxObject*, string> pxObjectCountDetails;
 //Uncomment to enable display of pointer by pxScene
 //#define USE_SCENE_POINTER
 
@@ -755,7 +759,9 @@ class pxRoot: public pxObject
 {
   rtDeclareObject(pxRoot, pxObject);
 public:
-  pxRoot(pxScene2d* scene): pxObject(scene) {}
+  pxRoot(pxScene2d* scene): pxObject(scene) {
+pxObjectCountDetails[this] = "pxroot";
+}
 };
 
 class pxViewContainer: public pxObject, public pxIViewContainer
@@ -788,7 +794,8 @@ public:
     addListener("onKeyDown", get<rtFunctionRef>("onKeyDown"));
     addListener("onKeyUp", get<rtFunctionRef>("onKeyUp"));
     addListener("onChar", get<rtFunctionRef>("onChar"));
-  }
+  	pxObjectCountDetails[this] = "pxViewContainer";
+	}
 
   virtual ~pxViewContainer() { /*rtLogDebug("#################~pxViewContainer\n");*/}
 

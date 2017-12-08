@@ -142,6 +142,8 @@ map<string, string> gWaylandAppsMap;
 map<string, string> gWaylandRegistryAppsMap;
 map<string, string> gPxsceneWaylandAppsMap;
 static bool gWaylandAppsConfigLoaded = false;
+
+map<pxObject*, string> pxObjectCountDetails;
 #define DEFAULT_WAYLAND_APP_CONFIG_FILE "./waylandregistry.conf"
 #define DEFAULT_ALL_APPS_CONFIG_FILE "./pxsceneappregistry.conf"
 
@@ -474,7 +476,16 @@ pxObject::~pxObject()
     }
     mChildren.clear();
     pxObjectCount--;
-    rtValue nullValue;
+    for (std:: map<pxObject* , string>:: iterator iter = pxObjectCountDetails.begin(); iter != pxObjectCountDetails.end(); iter++)
+    {
+	    if(iter->first == this)
+	    {
+		    pxObjectCountDetails.erase(iter);
+		    rtLogInfo(">>>>>>>>>... pxObject deleted\n");
+	    }
+    } 
+
+	rtValue nullValue;
     mReady.send("reject",nullValue);
     clearSnapshot(mSnapshotRef);
     clearSnapshot(mClipSnapshotRef);

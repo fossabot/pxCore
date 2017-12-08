@@ -26,7 +26,9 @@
 
 extern pxContext context;
 
-
+#include <map>
+using namespace std;
+extern map<pxObject*, string> pxObjectCountDetails;
 pxText::pxText(pxScene2d* scene):pxObject(scene), mFontLoaded(false), mFontDownloadRequest(NULL), mListenerAdded(false)
 {
   float c[4] = {1, 1, 1, 1};
@@ -35,6 +37,7 @@ pxText::pxText(pxScene2d* scene):pxObject(scene), mFontLoaded(false), mFontDownl
   mFont = pxFontManager::getFont(defaultFont);
   mPixelSize = defaultPixelSize;
   mDirty = true;
+	pxObjectCountDetails[this] = "pxText";
 }
 
 pxText::~pxText()
