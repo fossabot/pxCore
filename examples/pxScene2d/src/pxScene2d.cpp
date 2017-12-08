@@ -481,7 +481,7 @@ pxObject::~pxObject()
 	    if(iter->first == this)
 	    {
 		    pxObjectCountDetails.erase(iter);
-		    rtLogInfo(">>>>>>>>>... pxObject deleted\n");
+			break;
 	    }
     } 
 
