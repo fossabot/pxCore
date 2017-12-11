@@ -177,8 +177,6 @@ this.innerscene.on('onClose', function (e) {
     }
 
     this.innerscene.api = null;
-    delete this.innerscene;
-    this.root.removeAll();
     this.innerscene = null;
     this.sandbox.xmodule = null;
     this.sandbox.require = null;
