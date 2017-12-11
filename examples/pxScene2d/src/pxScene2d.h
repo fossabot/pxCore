@@ -699,7 +699,7 @@ public:
 
 public:
   rtEmitRef mEmit;
-
+string type = "pxObj";
 protected:
   // TODO getting freaking huge... 
 //  rtRef<pxObject> mParent;
@@ -1042,7 +1042,9 @@ public:
   {
     rtLogInfo(__FUNCTION__);
     rtLogDebug("~pxScriptView for mUrl=%s\n",mUrl.cString());
-    // Clear out these references since the script context
+    
+    rtLogInfo("~pxScriptView for mUrl=%s\n",mUrl.cString());
+// Clear out these references since the script context
     // can outlive this view
 #ifdef ENABLE_RT_NODE
     if(mCtx)
