@@ -526,8 +526,8 @@ void pxObject::dispose()
     vector<animation>::iterator it = mAnimations.begin();
     for(;it != mAnimations.end();it++)
     {
-      if ((*it).promise)
-        (*it).promise.send("reject",this);
+     // if ((*it).promise)
+      //  (*it).promise.send("reject",this);
     }
 
     rtValue nullValue;
