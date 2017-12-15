@@ -523,14 +523,14 @@ void pxObject::dispose()
   {
     //rtLogInfo(__FUNCTION__);
     mIsDisposed = true;
+    rtValue nullValue;
     vector<animation>::iterator it = mAnimations.begin();
     for(;it != mAnimations.end();it++)
     {
-     // if ((*it).promise)
-      //  (*it).promise.send("reject",this);
+      if ((*it).promise)
+        (*it).promise.send("reject",nullValue);
     }
 
-    rtValue nullValue;
     mReady.send("reject",nullValue);
 
     mAnimations.clear();
