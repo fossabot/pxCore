@@ -42,8 +42,54 @@ then
   checkError $? "unable to create directory artifacts" "could be permission issue" "Retry trigerring travis build"
 fi
 
-echo "***************************** Building externals ****" > $BUILDLOGS
-cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
-./build.sh>>$BUILDLOGS
-checkError $? "building externals failed" "compilation error" "Need to build the externals directory locally in $TRAVIS_OS_NAME"
+#before compiling check for stored externals
+$getPreBuiltExternal="false"
+cd $TRAVIS_BUILD_DIR
+./download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
+if [ "$?" -eq 0 ]
+then
+  mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
+  tar xvfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
+  if [ "$?" -eq 0 ]
+  then 
+    getPreBuiltExternal="true" 
+  fi
+else
+  echo "********************External download Failed*****************">> $BUILDLOGS
+fi
+
+
+if [ "$getPreBuiltExternal" -eq "true" ]#1
+then
+  echo "*****************Pre-Built External available*****************">>$BUILDLOGS
+else
+  echo "***************************** Building externals ****" >> $BUILDLOGS
+  cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
+  ./build.sh>>$BUILDLOGS
+
+  #Uploading the externals to server
+  if [ "$?" -eq 0 ]#2
+  then
+    if [ "$TRAVIS_OS_NAME" == "osx" ] && [ "$TRAVIS_BRANCH" == "master" ]
+    then
+      tar -cvzf $TRAVIS_BUILD_DIR/external.tar.gz ../external/ >>$BUILDLOGS
+      if [ "$?" -ne 0 ]#3
+      then
+        echo "***********Tar command failed****************">>$BUILDLOGS
+      else
+        cd $TRAVIS_BUILD_DIR
+	./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz external;>>$BUILDLOGS
+	if [ "$?" -ne 0 ]#4
+	then
+	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
+	fi	#4
+	rm -f $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
+      fi#3
+    fi#2.5
+  else
+    checkError $? "building externals failed" "compilation error" "Need to build the externals directory locally in $TRAVIS_OS_NAME"
+  fi#2
+fi #1
+
+
 exit 0;
