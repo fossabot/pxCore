@@ -49,7 +49,9 @@ then
   tar xvfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
   if [ "$?" -eq 0 ]
   then 
-    getPreBuiltExternal="true" 
+    getPreBuiltExternal="true"
+  else
+    mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
   fi
 else
   echo "********************External download Failed*****************">> $BUILDLOGS
@@ -67,7 +69,7 @@ else
   #Uploading the externals to server
   if [ "$?" -eq 0 ]
   then
-    if [ "$TRAVIS_OS_NAME" == "osx" ] && [ "$TRAVIS_BRANCH" == "master" ]
+    if [ "$TRAVIS_OS_NAME" == "osx" ] 
     then
       tar -cvzf $TRAVIS_BUILD_DIR/external.tar.gz ../external/ >>$BUILDLOGS
       if [ "$?" -ne 0 ]

@@ -9,3 +9,8 @@ export REMOTE_FILE=$(ssh -o StrictHostKeyChecking=no -p 2220 ${DEPLOY_USER}@${RE
 #export REMOTE_TEMPDIR=$(ssh -o StrictHostKeyChecking=no -p 2220 ${DEPLOY_USER}@${REMOTE_HOST} "mktemp -d")
 #echo ${REMOTE_DIR}
 scp -P 2220 ${DEPLOY_USER}@${REMOTE_HOST}:${REMOTE_FILE} ${DEST_FILE}
+if [ "$?" -ne 0 ]
+then
+  echo "******************scp  failed in download_external***************"
+  exit(1)
+fi
