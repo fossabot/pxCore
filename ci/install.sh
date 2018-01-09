@@ -40,7 +40,7 @@ then
 fi
 
 #before compiling check for stored externals
-getPreBuiltExternal="false"
+getPreBuiltExternal=false
 cd $TRAVIS_BUILD_DIR
 #check the PR file list, to check external is modified or not
 fileList=$(git diff --name-only HEAD...$TRAVIS_BRANCH)
@@ -49,7 +49,6 @@ echo "$fileList"
 echo"*************************************************"
 echo"***************ENV Print*************************"
 printenv
-env
 echo"***************File list ends********************"
 ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
 if [ "$?" -eq 0 ]
@@ -58,7 +57,7 @@ then
   tar xvfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
   if [ "$?" -eq 0 ]
   then 
-    getPreBuiltExternal="true"
+    getPreBuiltExternal=true
   else
     mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
   fi
@@ -68,7 +67,7 @@ else
 fi
 
 
-if [ "$getPreBuiltExternal" == "true" ]
+if [ "$getPreBuiltExternal" = true ]
 then
   echo "*****************Pre-Built External available*****************">>$BUILDLOGS
   echo "*****************Pre-Built External available*****************"
@@ -81,8 +80,8 @@ else
   #Uploading the externals to server
   if [ "$?" -eq 0 ]
   then
-    if [ "$TRAVIS_OS_NAME" == "osx" ] 
-    then
+    #if [ "$TRAVIS_OS_NAME" == "osx" ] 
+    #then
       tar -cvzf $TRAVIS_BUILD_DIR/external.tar.gz ../external/ >>$BUILDLOGS
       if [ "$?" -ne 0 ]
       then
@@ -98,7 +97,7 @@ else
 	fi	
 	rm -f $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
       fi
-    fi
+    #fi
   else
     checkError $? "building externals failed" "compilation error" "Need to build the externals directory locally in $TRAVIS_OS_NAME"
   fi
