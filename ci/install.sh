@@ -27,6 +27,7 @@ fi
 mkdir $TRAVIS_BUILD_DIR/logs
 touch $TRAVIS_BUILD_DIR/logs/build_logs
 BUILDLOGS=$TRAVIS_BUILD_DIR/logs/build_logs
+tail -f $TRAVIS_BUILD_DIR/logs/build_logs &
 
 if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request" ] ;
 then
@@ -45,7 +46,7 @@ fi
 #before compiling check for stored externals
 getPreBuiltExternal="false"
 cd $TRAVIS_BUILD_DIR
-./download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
+./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
 if [ "$?" -eq 0 ]
 then
   mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
