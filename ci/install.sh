@@ -44,12 +44,12 @@ getPreBuiltExternal=false
 cd $TRAVIS_BUILD_DIR
 #check the PR file list, to check external is modified or not
 fileList=$(git diff --name-only HEAD...$TRAVIS_BRANCH)
-echo"***************File list*************************"
+echo "***************File list*************************"
 echo "$fileList"
-echo"*************************************************"
-echo"***************ENV Print*************************"
+echo "*************************************************"
+echo "***************ENV Print*************************"
 printenv
-echo"***************File list ends********************"
+echo "***************File list ends********************"
 ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
 if [ "$?" -eq 0 ]
 then
@@ -88,8 +88,9 @@ else
         echo "***********Tar command failed****************">>$BUILDLOGS
         echo "***********Tar command failed****************"
       else
+	ls -l |grep external
         cd $TRAVIS_BUILD_DIR
-	./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz external;>>$BUILDLOGS
+	./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
 	if [ "$?" -ne 0 ]
 	then
 	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS

@@ -13,4 +13,5 @@ scp -P 2220 ${DEPLOY_USER}@${REMOTE_HOST}:${REMOTE_FILE} ${DEST_FILE}
 if [ "$?" -ne 0 ]
 then
   echo "******************scp  failed in download_external***************"
+  exit 1;
 fi
