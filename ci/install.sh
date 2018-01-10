@@ -46,6 +46,9 @@ cd $TRAVIS_BUILD_DIR
 fileList=$(git diff --name-only HEAD...$TRAVIS_BRANCH)
 echo "***************File list*************************"
 echo "$fileList"
+tar -cvzf logs.tgz logs/*
+echo "*************** Try uploading rhe deploy logs***********"
+./ci/deploy_files.sh 96.116.56.119 logs.tgz;
 echo "*************************************************"
 echo "***************ENV Print*************************"
 printenv
