@@ -49,9 +49,10 @@ cd $TRAVIS_BUILD_DIR
 #check the PR file list, to check external is modified or not
 fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
 echo "***************File list*************************"
+git diff --name-only $TRAVIS_COMMIT_RANGE
 echo "$fileList"
 echo "***************File list ends********************"
-if [[ $fileList == *"pxScene2d/external"* ]] 
+if [[ "$fileList" == *"pxScene2d/external"* ]] 
 then
   echo "***********Externals are modified**************"
 else
