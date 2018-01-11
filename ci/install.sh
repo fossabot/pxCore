@@ -61,7 +61,7 @@ else
   if [ "$?" -eq 0 ]
   then
     echo "********************* download completed**********************">> $BUILDLOGS
-    echo "********************* download completed**********************">>
+    echo "********************* download completed**********************"
     mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
     tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
     if [ "$?" -eq 0 ]
