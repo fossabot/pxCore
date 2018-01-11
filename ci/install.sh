@@ -60,12 +60,16 @@ else
   ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
   if [ "$?" -eq 0 ]
   then
+    echo "********************* download completed**********************">> $BUILDLOGS
+    echo "********************* download completed**********************">>
     mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
     tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
     if [ "$?" -eq 0 ]
     then 
       getPreBuiltExternal=true
     else
+      echo "********************* untar failed**********************">> $BUILDLOGS
+      echo "********************* untar failed**********************"
       mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
     fi
   else
