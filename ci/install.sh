@@ -51,7 +51,7 @@ fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
 echo "***************File list*************************"
 git diff --name-only $TRAVIS_COMMIT_RANGE
 echo "***************File list ends********************"
-if [[ "$fileList" == *"pxScene2d/external"* ]] 
+if [[ $fileList == *"pxScene2d/external"* ]] 
 then
   echo "***********Externals are modified**************"
 else
