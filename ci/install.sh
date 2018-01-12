@@ -76,45 +76,45 @@ else
     echo "********************External download Failed*****************">> $BUILDLOGS
     echo "********************External download Failed*****************"
   fi
+fi
 
-  if [ "$getPreBuiltExternal" = true ]
+if [ "$getPreBuiltExternal" = true ]
+then
+  echo "*****************Pre-Built External available*****************">>$BUILDLOGS
+  echo "*****************Pre-Built External available*****************"
+else
+  echo "***************************** Building externals ****" >> $BUILDLOGS
+  echo "***************************** Building externals ****"
+  cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
+  ./build.sh>>$BUILDLOGS
+
+  #Uploading the externals to server
+  if [ "$?" -eq 0 ]
   then
-    echo "*****************Pre-Built External available*****************">>$BUILDLOGS
-    echo "*****************Pre-Built External available*****************"
-  else
-    echo "***************************** Building externals ****" >> $BUILDLOGS
-    echo "***************************** Building externals ****"
-    cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
-    ./build.sh>>$BUILDLOGS
-
-    #Uploading the externals to server
-    if [ "$?" -eq 0 ]
+    #if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
+    if [ "$TRAVIS_EVENT_TYPE" = "push" ]
     then
-      #if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
-      if [ "$TRAVIS_EVENT_TYPE" = "push" ]
+      cd $TRAVIS_BUILD_DIR/examples/pxScene2d
+      echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
+      tar -czf $TRAVIS_BUILD_DIR/external.tgz external >>$BUILDLOGS
+      if [ "$?" -ne 0 ]
       then
-	cd $TRAVIS_BUILD_DIR/examples/pxScene2d
-        echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
-        tar -czf $TRAVIS_BUILD_DIR/external.tgz external >>$BUILDLOGS
+        echo "***********Tar command failed****************">>$BUILDLOGS
+        echo "***********Tar command failed****************"
+      else
+        cd $TRAVIS_BUILD_DIR
+        ./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
         if [ "$?" -ne 0 ]
         then
-          echo "***********Tar command failed****************">>$BUILDLOGS
-          echo "***********Tar command failed****************"
-        else
-          cd $TRAVIS_BUILD_DIR
-	  ./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
-	  if [ "$?" -ne 0 ]
-	  then
-	    echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
-	    echo "***********Uploading of externals to the server failed****************"
-	  fi	
-	  rm -f $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
-        fi
+	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
+	  echo "***********Uploading of externals to the server failed****************"
+        fi	
+        rm -f $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
       fi
-    else
-      checkError $? "building externals failed" "compilation error" "Need to build the externals directory locally in $TRAVIS_OS_NAME" >>$BUILDLOGS
     fi
-  fi 
-fi
+  else
+    checkError $? "building externals failed" "compilation error" "Need to build the externals directory locally in $TRAVIS_OS_NAME" >>$BUILDLOGS
+  fi
+fi 
 
 exit 0;
