@@ -47,6 +47,7 @@ getPreBuiltExternal=false
 cd $TRAVIS_BUILD_DIR
 
 if [ "$TRAVIS_OS_NAME" = "osx" ] 
+then
   #check the PR file list, to check external is modified or not
   fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
   echo "***************File list*************************"
