@@ -50,7 +50,6 @@ cd $TRAVIS_BUILD_DIR
 fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
 echo "***************File list*************************"
 git diff --name-only $TRAVIS_COMMIT_RANGE
-echo "$fileList"
 echo "***************File list ends********************"
 if [[ "$fileList" == *"pxScene2d/external"* ]] 
 then
@@ -63,7 +62,8 @@ else
     echo "********************* download completed**********************">> $BUILDLOGS
     echo "********************* download completed**********************"
     mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
-    tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
+    ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
+    tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
     if [ "$?" -eq 0 ]
     then 
       getPreBuiltExternal=true
@@ -100,7 +100,6 @@ else
           echo "***********Tar command failed****************">>$BUILDLOGS
           echo "***********Tar command failed****************"
         else
-	  ls -l |grep external >>$BUILDLOGS
           cd $TRAVIS_BUILD_DIR
 	  ./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
 	  if [ "$?" -ne 0 ]
