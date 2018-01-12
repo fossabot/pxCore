@@ -61,9 +61,9 @@ else
   then
     echo "********************* download completed**********************">> $BUILDLOGS
     echo "********************* download completed**********************"
-    mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
+    mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig ">> $BUILDLOGS
     ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
-    tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
+    tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d ">> $BUILDLOGS
     if [ "$?" -eq 0 ]
     then 
       getPreBuiltExternal=true
@@ -93,8 +93,9 @@ else
       #if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
       if [ "$TRAVIS_EVENT_TYPE" = "push" ]
       then
-        echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/external/" >>$BUILDLOGS
-        tar -czf $TRAVIS_BUILD_DIR/external.tgz $TRAVIS_BUILD_DIR/examples/pxScene2d/external/ >>$BUILDLOGS
+	cd $TRAVIS_BUILD_DIR/examples/pxScene2d
+        echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
+        tar -czf $TRAVIS_BUILD_DIR/external.tgz external >>$BUILDLOGS
         if [ "$?" -ne 0 ]
         then
           echo "***********Tar command failed****************">>$BUILDLOGS
