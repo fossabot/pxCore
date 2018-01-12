@@ -1,6 +1,4 @@
 #!/bin/sh
-export DEPLOY_DESTINATION=${DEPLOY_DESTINATION:-/var/www/html/ciresults}
-export DEPLOY_USER="${DEPLOY_USER:-ubuntu}"
 export DEPLOY_EXTERNAL_PATH=${DEPLOY_EXTERNAL_PATH:-http://96.116.56.119/ciresults/external.tgz}
 REMOTE_HOST="$1"
 DEST_FILE="$2"
