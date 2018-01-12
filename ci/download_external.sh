@@ -1,5 +1,5 @@
 #!/bin/sh
-export DEPLOY_EXTERNAL_PATH=${DEPLOY_EXTERNAL_PATH:-http://96.116.56.119/ciresults/external.tgz}
+export DEPLOY_EXTERNAL_PATH=${DEPLOY_EXTERNAL_PATH:-http://96.116.56.119/externals/external.tgz}
 REMOTE_HOST="$1"
 DEST_FILE="$2"
 wget -q $DEPLOY_EXTERNAL_PATH -P $2
