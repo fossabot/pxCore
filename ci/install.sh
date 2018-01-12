@@ -80,8 +80,8 @@ then
     fi
   fi
 fi
-echo "*********************lynx command **************************"
-lynx -dump -listonly  http://96.116.56.119/externals/  | grep http | grep \.tgz | awk '{print $2}' | tail -1
+echo "*********************curl command **************************"
+curl -s  http://96.116.56.119/externals/ --list-only | sed -n 's%.*href="\([^.]*\.tgz\)".*%\n\1%; ta; b; :a; s%.*\n%%; p' | tail -1
 
 if [ "$getPreBuiltExternal" = true ]
 then
