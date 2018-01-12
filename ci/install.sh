@@ -63,7 +63,7 @@ else
     echo "********************* download completed**********************"
     mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
     ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
-    tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/">> $BUILDLOGS
+    tar xfz $TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/ >>$BUILDLOGS
     if [ "$?" -eq 0 ]
     then 
       getPreBuiltExternal=true
