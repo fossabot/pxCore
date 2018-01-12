@@ -80,6 +80,8 @@ then
     fi
   fi
 fi
+echo "*********************lynx command **************************"
+lynx -dump -listonly  http://96.116.56.119/externals/  | grep http | grep \.tgz | awk '{print $2}' | tail -1
 
 if [ "$getPreBuiltExternal" = true ]
 then
