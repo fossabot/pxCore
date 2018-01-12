@@ -46,35 +46,37 @@ fi
 getPreBuiltExternal=false
 cd $TRAVIS_BUILD_DIR
 
-#check the PR file list, to check external is modified or not
-fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
-echo "***************File list*************************"
-echo $fileList
-echo "***************File list ends********************"
-if  echo $fileList | grep -q "pxScene2d/external/"; 
- then
-  echo "***********Externals are modified**************"
-else
-  echo "***********Externals are not modified**********"
-  ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
-  if [ "$?" -eq 0 ]
-  then
-    echo "********************* download completed**********************">> $BUILDLOGS
-    echo "********************* download completed**********************"
-    mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
-    ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
-    tar xfz $TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/ >>$BUILDLOGS
-    if [ "$?" -eq 0 ]
-    then 
-      getPreBuiltExternal=true
-    else
-      echo "********************* untar failed**********************">> $BUILDLOGS
-      echo "********************* untar failed**********************"
-      mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
-    fi
+if [ "$TRAVIS_OS_NAME" = "osx" ] 
+  #check the PR file list, to check external is modified or not
+  fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
+  echo "***************File list*************************"
+  echo $fileList
+  echo "***************File list ends********************"
+  if  echo $fileList | grep -q "pxScene2d/external/"; 
+    then
+    echo "***********Externals are modified**************"
   else
-    echo "********************External download Failed*****************">> $BUILDLOGS
-    echo "********************External download Failed*****************"
+    echo "***********Externals are not modified**********"
+    ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
+    if [ "$?" -eq 0 ]
+    then
+      echo "********************* download completed**********************">> $BUILDLOGS
+      echo "********************* download completed**********************"
+      mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
+      ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
+      tar xfz $TRAVIS_BUILD_DIR/examples/pxScene2d/external.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/ >>$BUILDLOGS
+      if [ "$?" -eq 0 ]
+      then 
+        getPreBuiltExternal=true
+      else
+        echo "********************* untar failed**********************">> $BUILDLOGS
+        echo "********************* untar failed**********************"
+        mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
+      fi
+    else
+      echo "********************External download Failed*****************">> $BUILDLOGS
+      echo "********************External download Failed*****************"
+    fi
   fi
 fi
 
@@ -92,7 +94,7 @@ else
   if [ "$?" -eq 0 ]
   then
     #if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
-    if [ "$TRAVIS_EVENT_TYPE" = "push" ]
+    if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
     then
       cd $TRAVIS_BUILD_DIR/examples/pxScene2d
       echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
