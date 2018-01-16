@@ -55,11 +55,11 @@ if [ "$TRAVIS_OS_NAME" = "osx" ] ;
 then
   if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request" ]
   then
-    brew install lighttpd
+    #brew install lighttpd
     brew install gcovr
     brew install lcov
-    brew install --HEAD ccache
-    ls -al $HOME/.ccache
+    #brew install --HEAD ccache
+    #ls -al $HOME/.ccache
   fi
 fi
 
