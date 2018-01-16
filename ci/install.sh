@@ -46,7 +46,7 @@ fi
 getPreBuiltExternal=false
 cd $TRAVIS_BUILD_DIR
 
-if [ "$TRAVIS_OS_NAME" = "osx" ] 
+if [ "$TRAVIS_OS_NAME" = "osx" ] || [ "$TRAVIS_OS_NAME" = "linux" ] 
 then
   #check the PR file list, to check external is modified or not
   fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
@@ -80,8 +80,6 @@ then
     fi
   fi
 fi
-echo "*********************curl command **************************"
-curl -s  http://96.116.56.119/externals/ --list-only | sed -n 's%.*href="\([^.]*\.tgz\)".*%\n\1%; ta; b; :a; s%.*\n%%; p' | tail -1
 
 if [ "$getPreBuiltExternal" = true ]
 then
@@ -97,24 +95,24 @@ else
   if [ "$?" -eq 0 ]
   then
     #if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
-    if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "$TRAVIS_EVENT_TYPE" = "push" ]
+    if [ "$TRAVIS_EVENT_TYPE" = "push" ]
     then
       cd $TRAVIS_BUILD_DIR/examples/pxScene2d
       echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
-      tar -czf $TRAVIS_BUILD_DIR/external.tgz external >>$BUILDLOGS
+      tar -czf "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz" external >>$BUILDLOGS
       if [ "$?" -ne 0 ]
       then
         echo "***********Tar command failed****************">>$BUILDLOGS
         echo "***********Tar command failed****************"
       else
         cd $TRAVIS_BUILD_DIR
-        ./ci/deploy_external.sh 96.116.56.119 $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
+        ./ci/deploy_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz">>$BUILDLOGS
         if [ "$?" -ne 0 ]
         then
 	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
 	  echo "***********Uploading of externals to the server failed****************"
         fi	
-        rm -f $TRAVIS_BUILD_DIR/external.tgz>>$BUILDLOGS
+        rm -f "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz">>$BUILDLOGS
       fi
     fi
   else
