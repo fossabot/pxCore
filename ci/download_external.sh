@@ -19,7 +19,7 @@ else
   fi
   mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig"
   ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
-  tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/$LATEST_FILE -C $TRAVIS_BUILD_DIR/examples/pxScene2d/"
+  tar xfz $DEST_FILE/$LATEST_FILE -C $TRAVIS_BUILD_DIR/examples/pxScene2d/
   if [ "$?" -ne 0 ]
   then
     echo "******************tar command failed with error ***************"
