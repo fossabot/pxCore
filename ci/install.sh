@@ -54,7 +54,7 @@ then
   echo $fileList
   echo "***************File list ends********************"
   if  echo $fileList | grep -q "pxScene2d/external/"; 
-    then
+  then
     echo "***********Externals are modified**************"
   else
     echo "***********Externals are not modified**********"
@@ -63,17 +63,7 @@ then
     then
       echo "********************* download completed**********************">> $BUILDLOGS
       echo "********************* download completed**********************"
-      mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig">> $BUILDLOGS
-      ls  -l "$TRAVIS_BUILD_DIR/examples/pxScene2d" |grep external
-      tar xfz "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_$TRAVIS_COMMIT.tgz -C $TRAVIS_BUILD_DIR/examples/pxScene2d/" >>$BUILDLOGS
-      if [ "$?" -eq 0 ]
-      then 
-        getPreBuiltExternal=true
-      else
-        echo "********************* untar failed**********************">> $BUILDLOGS
-        echo "********************* untar failed**********************"
-        mv "$TRAVIS_BUILD_DIR/examples/pxScene2d/external_orig" "$TRAVIS_BUILD_DIR/examples/pxScene2d/external" >> $BUILDLOGS 
-      fi
+      getPreBuiltExternal=true
     else
       echo "********************External download Failed*****************">> $BUILDLOGS
       echo "********************External download Failed*****************"
