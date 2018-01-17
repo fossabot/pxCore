@@ -50,34 +50,34 @@ if [ "$TRAVIS_OS_NAME" = "osx" ] || [ "$TRAVIS_OS_NAME" = "linux" ]
 then
   #check the PR file list, to check external is modified or not
   fileList=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
-  echo "***************File list*************************"
+  echo "************************* File list *************************"
   echo $fileList
-  echo "***************File list ends********************"
+  echo "********************** File list ends ***********************"
   if  echo $fileList | grep -q "pxScene2d/external/"; 
   then
-    echo "***********Externals are modified**************"
+    echo "***************** Externals are modified ******************"
   else
-    echo "***********Externals are not modified**********"
+    echo "**************** Externals are not modified ***************"
     ./ci/download_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/examples/pxScene2d/">>$BUILDLOGS
     if [ "$?" -eq 0 ]
     then
-      echo "********************* download completed**********************">> $BUILDLOGS
-      echo "********************* download completed**********************"
+      echo "************** External download completed **************">> $BUILDLOGS
+      echo "************** External download completed **************"
       getPreBuiltExternal=true
     else
-      echo "********************External download Failed*****************">> $BUILDLOGS
-      echo "********************External download Failed*****************"
+      echo "*************** External download Failed ****************">> $BUILDLOGS
+      echo "*************** External download Failed ****************"
     fi
   fi
 fi
 
 if [ "$getPreBuiltExternal" = true ]
 then
-  echo "*****************Pre-Built External available*****************">>$BUILDLOGS
-  echo "*****************Pre-Built External available*****************"
+  echo "*************** Pre-Built External available ****************">>$BUILDLOGS
+  echo "*************** Pre-Built External available ****************"
 else
-  echo "***************************** Building externals ****" >> $BUILDLOGS
-  echo "***************************** Building externals ****"
+  echo "******************** Building externals *********************" >> $BUILDLOGS
+  echo "******************** Building externals *********************"
   cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
   ./build.sh>>$BUILDLOGS
 
@@ -92,15 +92,15 @@ else
       tar -czf "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz" external >>$BUILDLOGS
       if [ "$?" -ne 0 ]
       then
-        echo "***********Tar command failed****************">>$BUILDLOGS
-        echo "***********Tar command failed****************"
+        echo "************* Tar command failed *************">>$BUILDLOGS
+        echo "************* Tar command failed *************"
       else
         cd $TRAVIS_BUILD_DIR
         ./ci/deploy_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz">>$BUILDLOGS
         if [ "$?" -ne 0 ]
         then
-	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
-	  echo "***********Uploading of externals to the server failed****************"
+	  echo "********* Uploading of externals to the server failed *********">>$BUILDLOGS
+	  echo "********* Uploading of externals to the server failed *********"
         fi	
         rm -f "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz">>$BUILDLOGS
       fi
