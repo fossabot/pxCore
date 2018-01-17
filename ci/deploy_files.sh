@@ -1,4 +1,5 @@
 #!/bin/sh
+
 export DEPLOY_DESTINATION=${DEPLOY_DESTINATION:-/var/www/html/ciresults}
 export DEPLOY_USER="${DEPLOY_USER:-ubuntu}"
 REMOTE_HOST="$1"
