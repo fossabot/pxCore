@@ -99,20 +99,20 @@ else
     then
       cd $TRAVIS_BUILD_DIR/examples/pxScene2d
       echo "tar -czf $TRAVIS_BUILD_DIR/external.tgz external" >>$BUILDLOGS
-      tar -czf "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz" external >>$BUILDLOGS
+      tar -czf "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz" external >>$BUILDLOGS
       if [ "$?" -ne 0 ]
       then
         echo "***********Tar command failed****************">>$BUILDLOGS
         echo "***********Tar command failed****************"
       else
         cd $TRAVIS_BUILD_DIR
-        ./ci/deploy_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz">>$BUILDLOGS
+        ./ci/deploy_external.sh 96.116.56.119 "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz">>$BUILDLOGS
         if [ "$?" -ne 0 ]
         then
 	  echo "***********Uploading of externals to the server failed****************">>$BUILDLOGS
 	  echo "***********Uploading of externals to the server failed****************"
         fi	
-        rm -f "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT_ID.tgz">>$BUILDLOGS
+        rm -f "$TRAVIS_BUILD_DIR/external_$TRAVIS_COMMIT.tgz">>$BUILDLOGS
       fi
     fi
   else
