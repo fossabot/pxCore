@@ -41,6 +41,7 @@ build_script:
   - call ci/build_win32.bat
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 after_build:
 =======
 after_script:
@@ -48,6 +49,8 @@ after_script:
   - call ci/script_win32.bat
 
 
+=======
+>>>>>>> 48222fb97... Appveyor configuration
 artifacts:
     # NSIS based installer
   - path: "build-win32\\_CPack_Packages\\win32\\NSIS\\pxscene-setup.exe"

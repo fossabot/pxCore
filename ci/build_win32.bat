@@ -28,8 +28,12 @@ md build-win32
 cd build-win32
 
 @rem build pxScene
+<<<<<<< HEAD
 @rem cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
 cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF ..
+=======
+cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+>>>>>>> 48222fb97... Appveyor configuration
 cmake --build . --config Release -- /m
 cpack .
 
