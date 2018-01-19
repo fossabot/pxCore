@@ -28,7 +28,8 @@ md build-win32
 cd build-win32
 
 @rem build pxScene
-cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+@rem cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF ..
 cmake --build . --config Release -- /m
 cpack .
 
