@@ -53,7 +53,7 @@ then
   echo "************************* File list *************************"
   echo $fileList
   echo "********************** File list ends ***********************"
-  env
+  
   if  echo $fileList | grep -q "pxScene2d/external/"; 
   then
     echo "***************** Externals are modified ******************"
@@ -81,7 +81,8 @@ else
   echo "************* No Pre-Built External available ***************"
   echo "******************** Building externals *********************" >> $BUILDLOGS
   echo "******************** Building externals *********************"
-  cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
+ env
+ cd $TRAVIS_BUILD_DIR/examples/pxScene2d/external
   ./build.sh>>$BUILDLOGS
 
   #Uploading the externals to server
