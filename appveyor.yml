@@ -40,7 +40,11 @@ build_script:
   - cd %S%
   - call ci/build_win32.bat
 
+<<<<<<< HEAD
 after_build:
+=======
+after_script:
+>>>>>>> d8517675b... appveyor support
   - call ci/script_win32.bat
 
 
