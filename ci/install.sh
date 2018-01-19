@@ -53,6 +53,7 @@ then
   echo "************************* File list *************************"
   echo $fileList
   echo "********************** File list ends ***********************"
+  env
   if  echo $fileList | grep -q "pxScene2d/external/"; 
   then
     echo "***************** Externals are modified ******************"
