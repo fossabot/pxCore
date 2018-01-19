@@ -40,7 +40,7 @@ build_script:
   - cd %S%
   - call ci/build_win32.bat
 
-after_script:
+after_build:
   - call ci/script_win32.bat
 
 
