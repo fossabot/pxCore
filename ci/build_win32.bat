@@ -24,17 +24,29 @@ cd examples/pxScene2d/external
 call buildWindows.bat
 
 cd "%BASE_DIR%"
+md logs
+cd logs
+set "LOGS_DIR=%CD%"
+set "BUILD_LOGS=%LOGS_DIR%\build_logs"
+cd ..
 md build-win32
 cd build-win32
 
 @rem build pxScene
-<<<<<<< HEAD
+
 @rem cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
-cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF ..
-=======
-cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
->>>>>>> 48222fb97... Appveyor configuration
-cmake --build . --config Release -- /m
+cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF .. > %BUILD_LOGS%
+if %ERRORLEVEL% NEQ 0 (
+    call checkError "cmake config failed"  "Config Error " "Check the error in build logs : %BUILD_LOGS%"
+	EXIT /B 1
+)
+
+cmake --build . --config Release -- /m >> %BUILD_LOGS%
+if %ERRORLEVEL% NEQ 0 (
+    call checkError "cmake build failed for pxcore,rtcore,pxscene app,libpxscene or unitttests" "Compilation error" "Check the errors displayed in this window"
+	EXIT /B 1
+)
+
 cpack .
 
 @rem create standalone archive
@@ -42,3 +54,14 @@ cd _CPack_Packages/win32/NSIS
 7z a -y pxscene-setup.zip pxscene-setup
 
 cd %ORIG_DIR%
+
+:checkError
+    echo. >>%EXEC_LOG%
+	echo. >>%EXEC_LOG%
+    echo  ******************* >> %EXEC_LOG%
+    echo  Failure Reason :  %~1 >> %EXEC_LOG%
+	echo  Cause : %~2 >> %EXEC_LOG%
+	echo  Reproduction Procedure : %~3 >> %EXEC_LOG%
+    echo  ******************* >> %EXEC_LOG%
+	echo. >>%EXEC_LOG%
+	echo. >>%EXEC_LOG%
