@@ -35,7 +35,7 @@ cd build-win32
 @rem build pxScene
 
 @rem cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
-cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF .. > %BUILD_LOGS%
+cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. > %BUILD_LOGS%
 if %ERRORLEVEL% NEQ 0 (
     call checkError "cmake config failed"  "Config Error " "Check the error in build logs : %BUILD_LOGS%"
 	EXIT /B 1
