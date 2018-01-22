@@ -43,7 +43,6 @@ build_script:
 
 
 after_script:
-
   - call ci/script_win32.bat
 
 
