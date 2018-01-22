@@ -39,10 +39,15 @@ build_script:
   - echo build_script...
   - cd %S%
   - call ci/build_win32.bat
-
+  - echo ********************************************
+  - echo ********** build_script completed **********
+  - echo ********************************************
 
 
 test_script:
+  - echo ********************************************
+  - echo ************** starting test ***************
+  - echo ********************************************
   - call ci/script_win32.bat
 
 
