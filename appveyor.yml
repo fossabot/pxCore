@@ -62,5 +62,5 @@ artifacts:
     type: Zip
 
 cache:
-  - examples\pxScene2d\external\libnode-v6.9.0  
+  - examples\pxScene2d\external\vc.build\builds  
 # validator: https://ci.appveyor.com/tools/validate-yaml
