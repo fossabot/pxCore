@@ -84,6 +84,9 @@ EXIT /B 0
     echo  ******************* >> %EXEC_LOG%
 	echo. >>%EXEC_LOG%
 	echo. >>%EXEC_LOG%
+	type %EXEC_LOG%
+	timeout /t 3
+	
 
 
 

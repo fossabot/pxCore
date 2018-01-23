@@ -5,6 +5,12 @@ echo %CD%
 call ci\execute_win32.bat
 
 echo ErrorLevel : %ERRORLEVEL%
+
+if %ERRORLEVEL% NEQ 0 (
+echo execute_win32.bat Failed
+EXIT /B 1
+)
+
 echo ************completed script_win32******************
 EXIT /B 0
 
