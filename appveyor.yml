@@ -59,4 +59,6 @@ artifacts:
     name: standalone
     type: Zip
 
+cache:
+  - node_modules    
 # validator: https://ci.appveyor.com/tools/validate-yaml

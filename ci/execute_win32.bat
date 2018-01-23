@@ -15,7 +15,7 @@ set "BASE_DIR=%CD%"
 
 echo %CD%
 set "EXEC_LOG=%BASE_DIR%\logs\exec_logs.txt"
-cd temp\_CPack_Packages\win32\NSIS\pxscene-setup
+cd build-win32\_CPack_Packages\win32\NSIS\pxscene-setup
 
 start /B pxscene.exe %testRunner%?tests=%BASE_DIR%\tests\pxScene2d\testRunner\tests.json > %EXEC_LOG% 2>&1 &
 
