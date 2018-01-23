@@ -54,14 +54,16 @@ cd _CPack_Packages/win32/NSIS
 7z a -y pxscene-setup.zip pxscene-setup
 
 cd %ORIG_DIR%
+EXIT /B 0
 
 :checkError
-    echo. >>%EXEC_LOG%
-	echo. >>%EXEC_LOG%
-    echo  ******************* >> %EXEC_LOG%
-    echo  Failure Reason :  %~1 >> %EXEC_LOG%
-	echo  Cause : %~2 >> %EXEC_LOG%
-	echo  Reproduction Procedure : %~3 >> %EXEC_LOG%
-    echo  ******************* >> %EXEC_LOG%
-	echo. >>%EXEC_LOG%
-	echo. >>%EXEC_LOG%
+    echo. >>%BUILD_LOGS%
+	echo. >>%BUILD_LOGS%
+    echo  ******************* >> %BUILD_LOGS%
+    echo  Failure Reason :  %~1 >> %BUILD_LOGS%
+	echo  Cause : %~2 >> %BUILD_LOGS%
+	echo  Reproduction Procedure : %~3 >> %BUILD_LOGS%
+    echo  ******************* >> %BUILD_LOGS%
+	echo. >>%BUILD_LOGS%
+	echo. >>%BUILD_LOGS%
+	EXIT /B 0

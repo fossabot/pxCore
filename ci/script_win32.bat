@@ -5,6 +5,8 @@ echo %CD%
 call ci\execute_win32.bat
 
 echo ErrorLevel : %ERRORLEVEL%
+echo ************completed script_win32******************
+EXIT /B 0
 
 
 
