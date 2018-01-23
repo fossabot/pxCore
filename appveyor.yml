@@ -42,7 +42,9 @@ build_script:
   - echo ********************************************
   - echo ********** build_script completed **********
   - echo ********************************************
-
+before_test:
+  - echo ********before test curr dir => %CD%
+  - call ci/before_test_win32.bat 
 test_script:
   - echo ********************************************
   - echo ************** starting test ***************
@@ -60,6 +62,5 @@ artifacts:
     type: Zip
 
 cache:
-  - node_modules
   - examples\pxScene2d\external\libnode-v6.9.0  
 # validator: https://ci.appveyor.com/tools/validate-yaml
