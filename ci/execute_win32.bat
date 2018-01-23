@@ -15,7 +15,7 @@ set "BASE_DIR=%CD%"
 
 echo %CD%
 set "EXEC_LOG=%BASE_DIR%\logs\exec_logs.txt"
-cd temp\_CPack_Packages\win32\NSIS\pxscene-setup
+cd build-win32\_CPack_Packages\win32\NSIS\pxscene-setup
 
 start /B pxscene.exe %testRunner%?tests=%BASE_DIR%\tests\pxScene2d\testRunner\tests.json > %EXEC_LOG% 2>&1 &
 
@@ -48,9 +48,29 @@ if %ERRORLEVEL% NEQ 0 (
 	EXIT /B 1
 )
 
+findstr /C:"pxobjectcount is \[0\]" "%EXEC_LOG%"
+set pxCountCheck=%ERRORLEVEL%
 
+findstr /C:"texture memory usage is \[0\]" "%EXEC_LOG%"
+set textureMemCheck=%ERRORLEVEL%
+
+if %pxCountCheck% NEQ 0 (
+	call:checkError %ERRORLEVEL% "Testrunner failure" "PxObjectCount Failed" "Follow the steps locally: export PX_DUMP_MEMUSAGE=1;export RT_LOG_LEVEL=info;./pxscene.sh $TESTRUNNERURL?tests=%BASE_DIR%\tests\pxScene2d\testRunner\tests.json locally and check for 'pxobjectcount is' in logs. Analyze why the usage is not 0"
+	cd %BASE_DIR%
+	EXIT /B 1
+)
+
+if %textureMemCheck% NEQ 0 (
+	call:checkError %ERRORLEVEL% "Testrunner failure" "PxObjectCount Failed" "Follow the steps locally: export PX_DUMP_MEMUSAGE=1;export RT_LOG_LEVEL=info;./pxscene.sh $TESTRUNNERURL?tests=%BASE_DIR%\tests\pxScene2d\testRunner\tests.json locally and check for 'texture memory usage is' in logs. Analyze why the usage is not 0" 
+	cd %BASE_DIR%
+	EXIT /B 1
+)
 
 cd %BASE_DIR%
+
+@rem memory validation pending
+
+
 EXIT /B 0
 @rem type exec_log.txt
 
