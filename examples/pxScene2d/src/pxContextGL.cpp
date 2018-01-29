@@ -1336,11 +1336,13 @@ static glShaderProgDetails  createShaderProgram(const char* vShaderTxt, const ch
 {
   struct glShaderProgDetails details = { 0,0,0 };
   GLint stat;
-
+rtLogError(">>>>>>>>>>>>>>>>>>> trace call glShaderSource 0 ");
   details.fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+  rtLogError(">>>>>>>>>>>>>>>>>>> trace call glShaderSource 1 ");
   glShaderSource(details.fragShader, 1, (const char **) &fShaderTxt, NULL);
   glCompileShader(details.fragShader);
   glGetShaderiv(details.fragShader, GL_COMPILE_STATUS, &stat);
+  rtLogError(">>>>>>>>>>>>>>>>>>> after trace calls glShaderSource 1 ");
 
   if (!stat)
   {
@@ -1360,11 +1362,13 @@ static glShaderProgDetails  createShaderProgram(const char* vShaderTxt, const ch
     //TODO get rid of exit
     exit(1);
   }
-
+rtLogError(">>>>>>>>>>>>>>>>>>> trace call glShaderSource 00 ");
   details.vertShader = glCreateShader(GL_VERTEX_SHADER);
+  rtLogError(">>>>>>>>>>>>>>>>>>> trace call glShaderSource 2 ");
   glShaderSource(details.vertShader, 1, (const char **) &vShaderTxt, NULL);
   glCompileShader(details.vertShader);
   glGetShaderiv(details.vertShader, GL_COMPILE_STATUS, &stat);
+  rtLogError(">>>>>>>>>>>>>>>>>>> trace call glShaderSource 2 ");
 
   if (!stat)
   {
