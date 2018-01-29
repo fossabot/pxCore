@@ -2,6 +2,9 @@
 
 echo ************starting script_win32******************
 echo %CD%
+echo "SDK VERSION : "
+echo %WINDOWSSDKDIR%
+
 call ci\execute_win32.bat
 
 echo ErrorLevel : %ERRORLEVEL%
