@@ -43,7 +43,7 @@ static duk_ret_t duv_loadfile(duk_context *ctx) {
   fd = 0;
   char path2[1024] = {0x00};
   strcpy(path2, "duk_modules/");
-  strcat(path2, path);
+  strcat(path2,  path);
 
   if (uv_fs_open(&loop, &req, path2, O_RDONLY, 0644, NULL) < 0) goto fail;
   uv_fs_req_cleanup(&req);
