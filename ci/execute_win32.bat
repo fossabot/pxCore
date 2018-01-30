@@ -16,6 +16,7 @@ set "BASE_DIR=%CD%"
 echo %CD%
 set "EXEC_LOG=%BASE_DIR%\logs\exec_logs.txt"
 cd build-win32\_CPack_Packages\win32\NSIS\pxscene-setup
+copy ~\opengl32.dll .
 
 dir
 
