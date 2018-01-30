@@ -51,15 +51,14 @@ test_script:
   - ps:  $basedir = $pwd.Path + "\"
      
   - ps:  $filepath = $basedir + "opengl32.dll"
-     
-     
-   - ps: $url = "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-32.7z"
+          
+  - ps: $url = "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-32.7z"
      
   - ps:  $webclient.DownloadFile($url, $filepath)
      
   - ps:  7z x opengl32sw-32.7z
     
-   - ps: move opengl32sw.dll ~\opengl32.dll
+  - ps: move opengl32sw.dll ~\opengl32.dll
    
   - cmd: echo ********************************************
   - cmd: echo ************** starting test ***************
