@@ -46,7 +46,7 @@ before_test:
   - echo ********before test curr dir => %CD%
   - call ci/before_test_win32.bat 
 test_script:
-  - ps: webclient = New-Object System.Net.WebClient
+  - ps: $webclient = New-Object System.Net.WebClient
      
   - ps:  $basedir = $pwd.Path + "\"
      
