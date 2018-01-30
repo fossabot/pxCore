@@ -48,24 +48,24 @@ before_test:
 test_script:
   ps: webclient = New-Object System.Net.WebClient
      
-  ps:  $basedir = $pwd.Path + "\"
+    $basedir = $pwd.Path + "\"
      
-  ps:  $filepath = $basedir + "opengl32.dll"
+   $filepath = $basedir + "opengl32.dll"
      
-  ps:  # Download and retry up to 3 times in case of network transient errors.
+    # Download and retry up to 3 times in case of network transient errors.
     
-  ps:  $url = "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-32.7z"
+    $url = "http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-32.7z"
      
-  ps:  $webclient.DownloadFile($url, $filepath)
+    $webclient.DownloadFile($url, $filepath)
      
-  ps:  7z x opengl32sw-32.7z
+    7z x opengl32sw-32.7z
     
-   ps: move opengl32sw.dll ~\opengl32.dll
+    move opengl32sw.dll ~\opengl32.dll
    
   cmd: echo ********************************************
-  cmd: echo ************** starting test ***************
-  cmd: echo ********************************************
-  cmd: call ci/script_win32.bat
+   echo ************** starting test ***************
+   echo ********************************************
+   call ci/script_win32.bat
 
 artifacts:
     # NSIS based installer
