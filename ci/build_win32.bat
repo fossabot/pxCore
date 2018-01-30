@@ -16,6 +16,10 @@ cd %~dp0
 cd ..
 set "BASE_DIR=%CD%"
 
+
+echo "SDK VERSION : "
+echo %WINDOWSSDKDIR%
+
 set "VSCMD_START_DIR=%CD%"
 call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat" x86
 
@@ -35,7 +39,7 @@ cd build-win32
 @rem build pxScene
 
 @rem cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
-cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. > %BUILD_LOGS%
+cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DPXSCENE_TEST_HTTP_CACHE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON -Wno-dev .. > %BUILD_LOGS%
 if %ERRORLEVEL% NEQ 0 (
     call checkError "cmake config failed"  "Config Error " "Check the error in build logs : %BUILD_LOGS%"
 	EXIT /B 1
