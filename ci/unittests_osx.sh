@@ -17,6 +17,14 @@ checkError()
 ulimit -c unlimited
 
 cd $TRAVIS_BUILD_DIR
+
+if [ "$DUKTAPE_SUPPORT" = "ON"] ; then
+  printf "\n************************ ENABLING DUKTAPE ************************"
+  touch ~/.sparkUseDuktape
+else
+  rm -f ~/.sparkUseDuktape
+fi
+
 dumped_core=0
 export HANDLE_SIGNALS=1
 export RT_LOG_LEVEL=info
