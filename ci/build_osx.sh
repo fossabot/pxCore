@@ -52,7 +52,7 @@ then
       echo "******************* Duktape Enabled ***********************"
       cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF .. >>$BUILDLOGS 2>&1;
     else
-      echo "******************* Duktape Disabled***********************"
+      echo "******************* Duktape Disabled ***********************"
       cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF -DSUPPORT_DUKTAPE=OFF .. >>$BUILDLOGS 2>&1;
     fi
   else

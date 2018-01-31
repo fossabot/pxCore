@@ -5,16 +5,15 @@ matrix:
     sudo: required
     env:
     - DUKTAPE_SUPPORT=OFF
-  - os: osx
-    osx_image: xcode6.4
-    env:
-    - DUKTAPE_SUPPORT=OFF
-#Duktape Support  
   - os: linux
     dist: trusty
     sudo: required
     env:
     - DUKTAPE_SUPPORT=ON
+  - os: osx
+    osx_image: xcode6.4
+    env:
+    - DUKTAPE_SUPPORT=OFF
   - os: osx
     osx_image: xcode6.4
     env:
