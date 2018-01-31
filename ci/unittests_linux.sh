@@ -6,9 +6,9 @@ checkError()
   then
     printf "\n\n*********************************************************************";
     printf "\n*******************CODE COVERAGE FAIL DETAILS************************";
-    printf "\nCI failure reason: "$2""
-    printf "\nCause:  "$3""
-    printf "\nReproduction/How to fix: "$4""	
+    printf "\nCI failure reason: $2"
+    printf "\nCause:  $3"
+    printf "\nReproduction/How to fix: $4"	
     printf "\n*********************************************************************";
     printf "\n*********************************************************************\n\n";
     exit 1
