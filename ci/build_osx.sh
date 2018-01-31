@@ -47,7 +47,13 @@ then
   echo "***************************** Generating config files ****" >> $BUILDLOGS
   if [ "$TRAVIS_EVENT_TYPE" != "cron" ] && [ "$TRAVIS_EVENT_TYPE" != "api" ] ;
   then
-    cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF .. >>$BUILDLOGS 2>&1;
+    if ["$DUKTAPE_SUPPORT" =  "ON" ]
+      echo "******************* Running with Duktape ***********************"
+      cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF .. >>$BUILDLOGS 2>&1;
+    else
+      echo "******************* Running without Duktape ***********************"
+      cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF -DSUPPORT_DUKTAPE=OFF .. >>$BUILDLOGS 2>&1;
+    fi
   else
     cmake .. >>$BUILDLOGS 2>&1;
   fi

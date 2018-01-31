@@ -51,6 +51,14 @@ printExecLogs()
 
 # Start testRunner ...
 rm -rf /var/tmp/pxscene.log
+
+if [ "$DUKTAPE_SUPPORT" -eq "ON"]
+then
+  touch ~/.sparkUseDuktape
+else
+  rm -f ~/.sparkUseDuktape
+fi
+
 cd $TRAVIS_BUILD_DIR/examples/pxScene2d/src/pxscene.app/Contents/MacOS
 ./pxscene.sh $TESTRUNNERURL?tests=file://$TRAVIS_BUILD_DIR/tests/pxScene2d/testRunner/tests.json &
 
