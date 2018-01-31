@@ -54,6 +54,7 @@ rm -rf /var/tmp/pxscene.log
 
 if [ "$DUKTAPE_SUPPORT" -eq "ON"]
 then
+  printf "\n************************ ENABLING DUKTAPE ************************"
   touch ~/.sparkUseDuktape
 else
   rm -f ~/.sparkUseDuktape

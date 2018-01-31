@@ -47,8 +47,9 @@ printExecLogs()
 
 # Start testRunner ... 
 
-if [ "$DUKTAPE_SUPPORT" -eq "ON"]
+if [ "$DUKTAPE_SUPPORT" = "ON"]
 then
+  printf "\n************************ ENABLING DUKTAPE ************************"
   touch ~/.sparkUseDuktape
 else
   rm -f ~/.sparkUseDuktape
