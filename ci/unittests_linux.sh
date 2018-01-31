@@ -17,7 +17,7 @@ checkError()
 
 ulimit -c unlimited
 
-if [ "$DUKTAPE_SUPPORT" = "ON"] ; then
+if [ $DUKTAPE_SUPPORT = ON] ; then
   printf "\n************************ ENABLING DUKTAPE ************************"
   touch ~/.sparkUseDuktape
 else
