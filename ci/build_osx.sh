@@ -48,6 +48,7 @@ then
   if [ "$TRAVIS_EVENT_TYPE" != "cron" ] && [ "$TRAVIS_EVENT_TYPE" != "api" ] ;
   then
     if [ "$DUKTAPE_SUPPORT" =  "ON" ]
+    then
       echo "******************* Running with Duktape ***********************"
       cmake -DBUILD_PX_TESTS=ON -DBUILD_PXSCENE_STATIC_LIB=ON -DBUILD_DEBUG_METRICS=ON -DBUILD_PXSCENE_RASTERIZER_PATH=OFF .. >>$BUILDLOGS 2>&1;
     else
