@@ -85,12 +85,12 @@ if [ "$retVal" -eq 1 ]
 then
 	if [ "$TRAVIS_PULL_REQUEST" != "false" ]
 	then
-		errCause="Either one or more tests failed. Check the above logs"
+		errCause="Execution is not completed. Check the above logs"
 		echo "********************** PRINTING TEST LOG **************************"
                 cat $TESTLOGS
                 echo "************************** LOG ENDS *******************************"
         else
-		errCause="Either one or more tests failed. Check the log file $TESTLOGS"
+		errCause="Execution is not completed. Check the log file $TESTLOGS"
 	fi 
 	checkError $retVal "unittests execution failed" "$errCause" "Rrun unittests locally"
 fi
