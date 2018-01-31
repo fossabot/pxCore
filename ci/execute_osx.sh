@@ -52,7 +52,7 @@ printExecLogs()
 # Start testRunner ...
 rm -rf /var/tmp/pxscene.log
 
-if [ "$DUKTAPE_SUPPORT" -eq "ON"]
+if [ "$DUKTAPE_SUPPORT" = "ON"]
 then
   printf "\n************************ ENABLING DUKTAPE ************************"
   touch ~/.sparkUseDuktape
