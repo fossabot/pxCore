@@ -19,7 +19,7 @@ ulimit -c unlimited
 cd $TRAVIS_BUILD_DIR
 
 if [ "$DUKTAPE_SUPPORT" = "ON" ] ; then
-  printf "\n************************ ENABLING DUKTAPE ************************"
+  printf "\n************************ ENABLING DUKTAPE ************************\n"
   touch ~/.sparkUseDuktape
 else
   rm -f ~/.sparkUseDuktape

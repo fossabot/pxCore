@@ -18,7 +18,7 @@ checkError()
 ulimit -c unlimited
 
 if [ "$DUKTAPE_SUPPORT" = "ON" ] ; then
-  printf "\n************************ ENABLING DUKTAPE ************************"
+  printf "\n************************ ENABLING DUKTAPE ************************\n"
   touch ~/.sparkUseDuktape
 else
   rm -f ~/.sparkUseDuktape
@@ -86,7 +86,7 @@ if [ "$retVal" -eq 0 ]
         else
 		errCause="Either one or more tests failed. Check the log file $TESTLOGS"
 	fi 
-	checkError -1 "unittests execution failed" "$errCause" "Run unittests locally"
+	checkError "-1" "unittests execution failed" "$errCause" "Run unittests locally"
 else
 	exit 0;
 fi
