@@ -49,6 +49,8 @@ pkill -9 -f pxscene2dtests.sh
 errCause=""
 grep "Global test environment tear-down" $TESTLOGS
 retVal=$?
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
+then
 if [ "$retVal" -ne 0 ]
 	then
 	if [ "$TRAVIS_PULL_REQUEST" != "false" ]
@@ -62,7 +64,7 @@ if [ "$retVal" -ne 0 ]
 	fi 
 	checkError $retVal "unittests execution failed" "$errCause" "Run unittests locally"
 fi
-
+fi
 #check for corefile presence
 $TRAVIS_BUILD_DIR/ci/check_dump_cores_linux.sh `pwd` pxscene2dtests $TESTLOGS
 retVal=$?
@@ -74,6 +76,8 @@ fi
 #check for failed test
 grep "FAILED TEST" $TESTLOGS
 retVal=$?
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
+then
 cd $TRAVIS_BUILD_DIR;
 if [ "$retVal" -eq 0 ]
 	then
@@ -89,4 +93,5 @@ if [ "$retVal" -eq 0 ]
 	checkError "-1" "unittests execution failed" "$errCause" "Run unittests locally"
 else
 	exit 0;
+fi
 fi

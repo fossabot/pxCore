@@ -99,7 +99,8 @@ fi
 grep "Failures: 0" $EXECLOGS
 testRunnerRetVal=$?   # Will return 1 if NOT found
 errCause=""
-
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
+then
 if [ "$testRunnerRetVal" -ne 0 ]
 	then
 	if [ "$TRAVIS_PULL_REQUEST" != "false" ]
@@ -112,6 +113,7 @@ if [ "$testRunnerRetVal" -ne 0 ]
 	checkError $testRunnerRetVal "Testrunner failure" "$errCause" "Follow the steps locally: export PX_DUMP_MEMUSAGE=1;export RT_LOG_LEVEL=info;./pxscene.sh $TESTRUNNERURL?tests=<pxcore dir>/tests/pxScene2d/testRunner/tests.json locally and check for 'Failures: 0' in logs. Analyze whether failures is present or not"
 	exit 1;
 fi
+fi
 
 # Check for pxobject or texture memory leaks
 grep "pxobjectcount is \[0\]" $EXECLOGS
@@ -123,6 +125,8 @@ echo "Values are $pxRetVal and $texRetVal";
 printf "\n\n -------------------------------- \n\n"
 
 
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
+then
 if [ "$pxRetVal" -eq 0 ]
 	then
 	echo "************************** pxobject count success **************************";
@@ -152,7 +156,7 @@ else
 	checkError $pxRetVal "pxobject leak" "$errCause" "Follow the steps locally: export PX_DUMP_MEMUSAGE=1;export RT_LOG_LEVEL=info;./pxscene.sh $TESTRUNNERURL?tests=<pxcore dir>/tests/pxScene2d/testRunner/tests.json locally and check for 'pxobjectcount is' in logs. Analyze why the count is not 0?"
 	exit 1;
 fi
-
+fi
 
 # Check for valgrind memory leaks
 grep "definitely lost: 0 bytes in 0 blocks" $VALGRINDLOGS
