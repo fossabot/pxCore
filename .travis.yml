@@ -5,6 +5,12 @@ matrix:
     sudo: required
   - os: osx
     osx_image: xcode6.4
+    env:
+    - DUKTAPE_SUPPORT=OFF
+  - os: osx
+    osx_image: xcode6.4
+    env:
+    - DUKTAPE_SUPPORT=ON
 language: c++
 before_install:
 - if [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]; then openssl aes-256-cbc -K $encrypted_a739ef9a19a4_key
@@ -35,6 +41,17 @@ script:
   gcov -f $TRAVIS_BUILD_DIR/tracefile ; fi
 - if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request"
   ]; then genhtml -o $TRAVIS_BUILD_DIR/logs/codecoverage $TRAVIS_BUILD_DIR/tracefile;
+  fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+- export DUKTAKE_SUPPORT=ON
+- touch ~/.sparkUseDuktape
+- "./ci/script.sh"
+- if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request"
+  ]; then codecov --build "$TRAVIS_OS_NAME-$TRAVIS_COMMIT-$TRAVIS_BUILD_NUMBER" -X
+  gcov -f $TRAVIS_BUILD_DIR/tracefile ; fi
+- if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request"
+  ]; then genhtml -o $TRAVIS_BUILD_DIR/logs/codecoverage $TRAVIS_BUILD_DIR/tracefile;
+  fi
   fi
 after_script:
 - "./ci/after_script.sh"
