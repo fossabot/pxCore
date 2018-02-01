@@ -43,7 +43,7 @@ script:
   ]; then genhtml -o $TRAVIS_BUILD_DIR/logs/codecoverage $TRAVIS_BUILD_DIR/tracefile;
   fi
 - "./ci/after_script.sh"
-- if [ "$TRAVIS_OS_NAME" = "linux" ] ; then
+- if [ "${TRAVIS_OS_NAME}" = "linux" ] ; then
 - export DUKTAKE_SUPPORT=ON
 - touch ~/.sparkUseDuktape
 - "./ci/script.sh"
