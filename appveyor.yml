@@ -20,7 +20,13 @@ version: 0dev.{build}
 
 clone_depth: 50
 
-platform: x86
+matrix:
+  - platform: x86
+    environment:
+      DUKTAPE_SUPPORT=OFF
+  - platoform: x86
+    environment:
+      DUKTAPE_SUPPORT=ON
 
 image: Visual Studio 2017
 
