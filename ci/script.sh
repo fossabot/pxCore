@@ -58,7 +58,7 @@ then
   sh build_px.sh 
   checkError $? "#### Build/unittests/execution [build_px.sh] failed" "Either build problem/execution problem" "Analyze corresponding log file"
 
-if ( [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$DUKTAPE_SUPPORT" = "ON"] ); then
+if ( [ "$TRAVIS_OS_NAME" = "linux" ] && [ "$DUKTAPE_SUPPORT" = "ON" ] ); then
   echo "*************** Build not required ****************"
 else
   echo "*************** Building files ********************"
