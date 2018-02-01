@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export DUKTAKE_SUPPORT=ON
+export DUKTAPE_SUPPORT=ON
 touch ~/.sparkUseDuktape
 echo "**************Enabling ducktape ******************* $?"
 rm -rf $TRAVIS_BUILD_DIR/logs
