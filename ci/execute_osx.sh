@@ -53,6 +53,9 @@ printExecLogs()
 rm -rf /var/tmp/pxscene.log
 
 cd $TRAVIS_BUILD_DIR/examples/pxScene2d/src/pxscene.app/Contents/MacOS
+
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
+then
 ./pxscene.sh $TESTRUNNERURL?tests=file://$TRAVIS_BUILD_DIR/tests/pxScene2d/testRunner/tests.json &
 
 # Monitor testRunner ...
@@ -167,4 +170,15 @@ if [ "$leakcount" -ne 0 ]
 else
 	echo "Valgrind reports success !!!!!!!!!!!"
 fi
+fi 
+#Test for node completed
+if [ "$DUKTAPE_SUPPORT" = "ON" ]
+then
+  ./pxscene.sh http://pxscene.org/examples/px-reference/gallery/fancy.js >> $EXECLOGS 2>&1 &
+  sleep 30;
+  kill -15 `ps -ef | grep pxscene |grep -v grep|grep -v pxscene.sh|awk '{print $2}'`
+  echo "********** Terminated fancy.js ************" >>$EXECLOGS
+  sleep 20;
+fi
+
 exit 0;

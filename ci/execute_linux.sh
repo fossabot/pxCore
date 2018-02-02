@@ -196,7 +196,7 @@ else
   if [ "$TRAVIS_PULL_REQUEST" != "false" ]
   then
     errCause="Check the above logs"
-    printExecLogs
+    cat $VALGRINDLOGS 
   else
     errCause="Check the file $VALGRINDLOGS and see for definitely lost count"
   fi
