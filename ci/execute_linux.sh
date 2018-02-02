@@ -161,13 +161,10 @@ fi #For Node
 if [ "$DUKTAPE_SUPPORT" = "ON" ]
 then
   ./pxscene.sh http://pxscene.org/examples/px-reference/gallery/fancy.js >> $EXECLOGS 2>&1 &
-  sleep 2;
+  sleep 35;
   kill -15 `ps -ef | grep pxscene |grep -v grep|grep -v pxscene.sh|awk '{print $2}'`
+  sleep 20;
   echo "********** Terminated fancy.js ************" >>$EXECLOGS
-  ./pxscene.sh http://pxscene.org/examples/px-reference/gallery/gallery.js >> $EXECLOGS 2>&1 &
-  sleep 5;
-  kill -15 `ps -ef | grep pxscene |grep -v grep|grep -v pxscene.sh|awk '{print $2}'`
-  echo "********** Terminated gallery.js.js ************" >>$EXECLOGS
 fi
 
 #check for crash
