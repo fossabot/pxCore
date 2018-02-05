@@ -25,8 +25,9 @@ platform: x86
 image: Visual Studio 2017
 
 environment:
-  DUKTAPE_SUPPORT: ON
-  DUKTAPE_SUPPORT: OFF
+  matrix:
+  - DUKTAPE_SUPPORT: ON
+  - DUKTAPE_SUPPORT: OFF
     
 clone_folder: "c:/dw/pxCore"
 
