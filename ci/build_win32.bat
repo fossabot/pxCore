@@ -37,7 +37,13 @@ md build-win32
 cd build-win32
 
 @rem build pxScene
-cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+if %DUKTAPE_SUPPORT%=="ON" (
+    cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..
+)
+
+if %DUKTAPE_SUPPORT%=="OFF" (
+    cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON ..
+)
 cmake --build . --config Release -- /m
 cpack .
 

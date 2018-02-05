@@ -25,9 +25,10 @@ platform: x86
 image: Visual Studio 2017
 
 environment:
+  S: "c:/dw/pxCore"
   matrix:
   - DUKTAPE_SUPPORT: ON
-  - DUKTAPE_SUPPORT: OFF
+  -     DUKTAPE_SUPPORT: OFF
     
 clone_folder: "c:/dw/pxCore"
 
@@ -39,7 +40,7 @@ init:
 
 build_script:
   - echo build_script...
-  - cd c:/dw/pxCore
+  - cd %S%
   - call ci/build_win32.bat
 
 test: off
