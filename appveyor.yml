@@ -25,7 +25,6 @@ platform: x86
 image: Visual Studio 2017
 
 environment:
-  S: "c:/dw/pxCore"
   DUKTAPE_SUPPORT: ON
   DUKTAPE_SUPPORT: OFF
     
@@ -39,7 +38,7 @@ init:
 
 build_script:
   - echo build_script...
-  - cd %S%
+  - cd c:/dw/pxCore
   - call ci/build_win32.bat
 
 test: off
