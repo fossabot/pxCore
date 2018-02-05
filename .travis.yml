@@ -36,11 +36,13 @@ before_script:
   -F '<string>' '{print $2}'|awk -F'</string>' '{print $1}'`; fi
 script:
 - "./ci/script.sh"
+- if [ "$DUKTAPE_SUPPORT" != "ON" ] ; then
 - if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request"
   ]; then codecov --build "$TRAVIS_OS_NAME-$TRAVIS_COMMIT-$TRAVIS_BUILD_NUMBER" -X
   gcov -f $TRAVIS_BUILD_DIR/tracefile ; fi
 - if [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request"
   ]; then genhtml -o $TRAVIS_BUILD_DIR/logs/codecoverage $TRAVIS_BUILD_DIR/tracefile;
+  fi
   fi
 - "./ci/after_script.sh"
 - if [ "${TRAVIS_OS_NAME}" = "linux" 
