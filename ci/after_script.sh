@@ -77,6 +77,6 @@ then
    git add $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist
    git add $TRAVIS_BUILD_DIR/RELEASE_NOTES
    git commit -m "Change version for release $PX_VERSION [skip ci]"
-   git push --repo="https://$REPO_USER_NAME:$GH_TOKEN@github.com/$REPO_USER_NAME/$REPO_NAME.git"
+   git push --repo="https://arun-govindan:7f1247d663b1d09282872189ccfd9aa2ed5aa1c4@github.com/arun-govindan/pxCore.git"
    checkError $? "unable to commit data to repo" "" "check the credentials"
 fi
