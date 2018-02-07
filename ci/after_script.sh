@@ -52,7 +52,7 @@ then
 fi
 
 #update release  notes and info.plist in github
-if ( [ "$TRAVIS_EVENT_TYPE" = "cron" ] || [ "$TRAVIS_EVENT_TYPE" = "api" ] ) && [ "$UPDATE_VERSION" = "true" ] ;
+if ( [ "$TRAVIS_EVENT_TYPE" = "cron" ] ) || ( [ "$TRAVIS_EVENT_TYPE" = "api" ] && [ "$UPDATE_VERSION" = "true" ] ) ;
 then
    git checkout master
    checkError $? "unable to checkout master branch in pxscene" "" "check the credentials"
@@ -60,7 +60,9 @@ then
    checkError $? "unable to find CFBundleShortVersionString entry in Info.plist" "" "check the repo"
    echo $linenumber
    export PX_VERSION=`cat $TRAVIS_BUILD_DIR/VERSION`
-   sed -i '.bak' "`echo $((linenumber+1))`s/.*/       <string>$PX_VERSION<\\/string>/g" $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist
+   if [ "$?" -eq "0" ] ; then
+     sed -i '.bak' "`echo $((linenumber+1))`s/.*/       <string>$PX_VERSION<\\/string>/g" $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist
+   fi
    checkError $? "unable to find versions entry in Info.plist" "" "check the repo"
    cp $TRAVIS_BUILD_DIR/RELEASE_NOTES $TRAVIS_BUILD_DIR/RELEASE_NOTES_bkp
    checkError $? "" "" ""
