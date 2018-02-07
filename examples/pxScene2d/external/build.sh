@@ -153,7 +153,6 @@ fi
 
 #-------- DUKTAPE
 
-if [ "$(uname)" != "Darwin" ]; then
 
 if [ ! -e dukluv/build/libduktape.a ]
 then
@@ -164,7 +163,6 @@ then
     cmake ..
     make "-j${make_parallel}"
     cd ..
-fi
 fi
 #-------- BODYMOVIN
 #
