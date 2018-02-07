@@ -52,7 +52,7 @@ then
 fi
 
 #update release  notes and info.plist in github
-if [ "$TRAVIS_EVENT_TYPE" = "api" ] && [ "$UPDATE_VERSION" = "true" ] ;
+if ( [ "$TRAVIS_EVENT_TYPE" = "cron" ] || [ "$TRAVIS_EVENT_TYPE" = "api" ] ) && [ "$UPDATE_VERSION" = "true" ] ;
 then
    git checkout master
    checkError $? "unable to checkout master branch in pxscene" "" "check the credentials"
