@@ -153,6 +153,8 @@ fi
 
 #-------- DUKTAPE
 
+if [ "$(uname)" != "Darwin" ]; then
+
 if [ ! -e dukluv/build/libduktape.a ]
 then
     cd dukluv
@@ -163,7 +165,7 @@ then
     make "-j${make_parallel}"
     cd ..
 fi
-
+fi
 #-------- BODYMOVIN
 #
 # TODO:  ensure that "npm" is installed ... possibly via "brew install npm" (on Mac)
