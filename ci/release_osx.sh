@@ -1,5 +1,10 @@
 #!/bin/sh
+if [ "$TRAVIS_EVENT_TYPE" != "cron" ]
+then
+export DEPLOY_DESTINATION=${DEPLOY_DESTINATION:-/var/www/html/edge}
+else
 export DEPLOY_DESTINATION=${DEPLOY_DESTINATION:-/var/www/html/releases}
+fi
 export DEPLOY_USER="${DEPLOY_USER:-ubuntu}"
 REMOTE_HOST="$1"
 REMOTE_DIR="${DEPLOY_DESTINATION}/${PX_VERSION}"
