@@ -81,10 +81,12 @@ then
   cp $TRAVIS_BUILD_DIR/examples/pxScene2d/src/deploy/mac/software_update.plist $TRAVIS_BUILD_DIR/artifacts/.
   checkError $? "Copying software_update.plist failed" "Could be build problem or file not generated" "Analyze build logs"
 #commit it to master branch
-  cp $TRAVIS_BUILD_DIR/examples/pxScene2d/src/deploy/mac/pxscene.dmg  https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/ -f
-  git add https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/pxscene.dmg
-  git commit -m "pxscene edge "
-  git push --repo="https://arun-govindan:7f1247d663b1d09282872189ccfd9aa2ed5aa1c4@github.com/arun-govindan/pxscene.git"
+#  cp $TRAVIS_BUILD_DIR/examples/pxScene2d/src/deploy/mac/pxscene.dmg  https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/ -f
+#  cp $TRAVIS_BUILD_DIR/tree/master/examples/pxScene2d/src/macstuff/Info.plist https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/ -f
+#  git add https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/pxscene.dmg https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/Info.plist
+
+ # git commit -m "pxscene edge "
+ # git push --repo="https://arun-govindan:7f1247d663b1d09282872189ccfd9aa2ed5aa1c4@github.com/arun-govindan/pxscene.git"
 
 fi
 
