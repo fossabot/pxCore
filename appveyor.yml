@@ -26,7 +26,6 @@ image: Visual Studio 2017
 
 environment:
   S: "c:/dw/pxCore"
-  - SET
   matrix:
   - DUKTAPE_SUPPORT: ON
   - DUKTAPE_SUPPORT: OFF
@@ -38,6 +37,7 @@ clone_folder: "c:/dw/pxCore"
 # Build pipeline: https://www.appveyor.com/docs/build-configuration/
 init:
   - echo environment setup...
+  - SET
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
   - choco install putty.install
