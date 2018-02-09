@@ -38,6 +38,7 @@ init:
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
   - choco install putty.install
+  - type "C:\ProgramData\chocolatey\logs\chocolatey.log"
 build_script:
   - echo build_script...
   - cd %S%
