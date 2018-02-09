@@ -22,11 +22,6 @@ set "BASE_DIR=%CD%"
 set "VSCMD_START_DIR=%CD%"
 call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat" x86
 
-IF EXIST "C:\PuTTY\pscp.exe" (
-echo "-------------------------------------Yes" 
-) ELSE (
-echo "-------------------------------------No"
-)
 
 @rem build dependencies
 cd examples/pxScene2d/external
@@ -58,5 +53,9 @@ cpack .
 @rem create standalone archive
 cd _CPack_Packages/win32/NSIS
 7z a -y pxscene-setup.zip pxscene-setup
+
+7z a -y pxscene-setup-exe.zip pxscene-setup.exe
+
+"C:\Program Files\PuTTY\pscp.exe" -i pxscene-build.pem.ppk pxscene-setup-exe.zip "ubuntu@96.116.56.119:/var/www/html/edge/windows"
 
 cd %ORIG_DIR%
