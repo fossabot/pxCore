@@ -52,17 +52,14 @@ then
 fi
 
 #update release  notes and info.plist in github
-if ( [ "$TRAVIS_EVENT_TYPE" = "cron" ] ) || ( [ "$TRAVIS_EVENT_TYPE" = "api" ] && [ "$UPDATE_VERSION" = "true" ] ) ;
+if  [ "$TRAVIS_EVENT_TYPE" = "api" ] && [ "$UPDATE_VERSION" = "true" ]  ;
 then
    git checkout master
    checkError $? "unable to checkout master branch in pxscene" "" "check the credentials"
    export linenumber=`awk '/CFBundleShortVersionString/{ print NR; exit }' $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist`
    checkError $? "unable to find CFBundleShortVersionString entry in Info.plist" "" "check the repo"
    echo $linenumber
-   export PX_VERSION=`cat $TRAVIS_BUILD_DIR/VERSION`
-   if [ "$?" -eq "0" ] ; then
-     sed  "`echo $((linenumber+1))`s/.*/        <string>$PX_VERSION<\\/string>/g" $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist
-   fi
+   sed  "`echo $((linenumber+1))`s/.*/        <string>$PX_VERSION<\\/string>/g" $TRAVIS_BUILD_DIR/examples/pxScene2d/src/macstuff/Info.plist
    checkError $? "unable to find versions entry in Info.plist" "" "check the repo"
    cp $TRAVIS_BUILD_DIR/RELEASE_NOTES $TRAVIS_BUILD_DIR/RELEASE_NOTES_bkp
    checkError $? "" "" ""
@@ -82,15 +79,5 @@ then
    git push --repo="https://arun-govindan:7f1247d663b1d09282872189ccfd9aa2ed5aa1c4@github.com/arun-govindan/pxCore.git"
    checkError $? "unable to commit data to repo" "" "check the credentials"
 
-#commit it to master branch
-  cp $TRAVIS_BUILD_DIR/examples/pxScene2d/src/deploy/mac/pxscene.dmg  https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/ -f
-  checkError $? "1" "1" "1"
-  cp $TRAVIS_BUILD_DIR/tree/master/examples/pxScene2d/src/macstuff/Info.plist https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/ -f
-  checkError $? "2" "2" "2"
-  git add https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/pxscene.dmg https://github.com/arun-govindan/pxscene/tree/gh-pages/dist/osx/pxsceneedge/Info.plist
-  checkError $? "3" "3" "3"
-
-  git commit -m "pxscene edge "
-  git push --repo="https://arun-govindan:7f1247d663b1d09282872189ccfd9aa2ed5aa1c4@github.com/arun-govindan/pxscene.git"
 
 fi
