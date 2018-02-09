@@ -38,8 +38,10 @@ init:
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
   - choco install putty.install
-  - cd "C:\"
-  - ps: "ls \"C:/\""
+  - cd "C:\Program Files (x86)\PuTTY"
+  - ps: "ls"
+  - cd "C:\Program Files (x86)"
+  - ps: "ls"
   - dir /s pscp.exe
 build_script:
   - echo build_script...
