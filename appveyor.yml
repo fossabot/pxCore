@@ -41,6 +41,7 @@ init:
   - ps: "ls \"C:/\""
   - choco install putty.install
   - nuget install secure-file -ExcludeVersion
+  - ps: "ls %S%"
   - secure-file\tools\secure-file -decrypt "%S%/pxscene-build.pem.ppk.enc" -secret %my_secret%
 build_script:
   - echo build_script...
