@@ -26,6 +26,7 @@ image: Visual Studio 2017
 
 environment:
   S: "c:/dw/pxCore"
+  SET
   matrix:
   - DUKTAPE_SUPPORT: ON
   - DUKTAPE_SUPPORT: OFF
@@ -40,13 +41,15 @@ init:
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
   - choco install putty.install
-  
+  - nuget install secure-file -ExcludeVersion
+  - secure-file\tools\secure-file -decrypt "%S%\pxscene-build.pem.ppk.enc" -secret %my_secret%
 build_script:
   - echo build_script...
   - cd %S%
   - call ci/build_win32.bat
 
-  
+after_build:
+  - call ci/after_build_win32.bat
   
 test: off
 
