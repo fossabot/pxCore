@@ -26,7 +26,7 @@ image: Visual Studio 2017
 
 environment:
   S: "c:/dw/pxCore"
-  SET
+  - SET
   matrix:
   - DUKTAPE_SUPPORT: ON
   - DUKTAPE_SUPPORT: OFF
