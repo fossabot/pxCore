@@ -39,7 +39,7 @@ init:
   - ps: "ls \"C:/\""
   - choco install putty.install
   - cd "C:\Program Files\PuTTY\"
-  - ps: "ls \"C:/\""
+  - ps: "ls "
 build_script:
   - echo build_script...
   - cd %S%
