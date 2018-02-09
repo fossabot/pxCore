@@ -37,8 +37,7 @@ init:
   - echo environment setup...
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
-  - choco install pscp.exe
-
+  - choco install putty.install
 build_script:
   - echo build_script...
   - cd %S%
