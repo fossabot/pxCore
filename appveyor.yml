@@ -38,8 +38,8 @@ init:
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
   - choco install putty.install
-  - cd "C:\"
-  - dir /s putty
+  - cd "C:\Program Files\PuTTY\"
+  - ps: "ls \"C:/\""
 build_script:
   - echo build_script...
   - cd %S%
