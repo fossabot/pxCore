@@ -37,10 +37,7 @@ init:
   - echo environment setup...
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
-  - choco list
-  - choco search pscp
-  - ps: "choco list"
-  - ps: "choco search pscp"
+  - choco install pscp.exe
 
 build_script:
   - echo build_script...
