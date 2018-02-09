@@ -28,7 +28,7 @@ environment:
   S: "c:/dw/pxCore"
   matrix:
   - DUKTAPE_SUPPORT: ON
-  -     DUKTAPE_SUPPORT: OFF
+  - DUKTAPE_SUPPORT: OFF
     
 clone_folder: "c:/dw/pxCore"
 
@@ -37,6 +37,10 @@ init:
   - echo environment setup...
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
+  - choco list
+  - choco search pscp
+  - ps: "choco list"
+  - ps: "choco search pscp"
 
 build_script:
   - echo build_script...
@@ -45,14 +49,6 @@ build_script:
 
 test: off
 
-artifacts:
-    # NSIS based installer
-  - path: "build-win32\\_CPack_Packages\\win32\\NSIS\\pxscene-setup.exe"
-    name: installer
-    type: Auto
-    # Standalone (requires no installation)
-  - path: "build-win32\\_CPack_Packages\\win32\\NSIS\\pxscene-setup.zip"
-    name: standalone
-    type: Zip
+
 
 # validator: https://ci.appveyor.com/tools/validate-yaml
