@@ -39,12 +39,12 @@ init:
   - SET
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
-  - choco install putty.install
-  - nuget install secure-file -ExcludeVersion
-  - ps: ls 
 build_script:
   - echo build_script...
   - cd %S%
+  - choco install putty.install
+  - nuget install secure-file -ExcludeVersion
+  - ps: ls
   - secure-file\tools\secure-file -decrypt "%S%/pxscene-build.pem.ppk.enc" -secret %my_secret%
   - call ci/build_win32.bat
 
