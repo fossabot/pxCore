@@ -39,6 +39,8 @@ init:
   - SET
   - git config --system core.longpaths true
   - ps: "ls \"C:/\""
+hosts:
+  build_server:96.116.56.119
 build_script:
   - echo build_script...
   - cd %S%
