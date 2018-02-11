@@ -42,12 +42,12 @@ cd build-win32
 @rem build pxScene
 if "%DUKTAPE_SUPPORT%" == "ON" (
     echo "*********************** Enabling Duktape ***********************"
-    cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  >> BUILD_LOGS 
+    cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  
 )
 
 if "%DUKTAPE_SUPPORT%" == "OFF" (
 echo "*********************** Disabling Duktape ***********************"
-    cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. >> BUILD_LOGS 
+    cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON ..  
 )
 cmake --build . --config Release -- /m
 cpack .
