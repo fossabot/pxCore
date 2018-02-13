@@ -184,7 +184,7 @@ fi
 
 # Check for valgrind memory leaks
 
-if [ "$DUKTAPE_SUPPORT" = "ON" ]
+if [ "$DUKTAPE_SUPPORT" != "ON" ]
 then
   grep "definitely lost: 0 bytes in 0 blocks" $VALGRINDLOGS
   retVal=$?
