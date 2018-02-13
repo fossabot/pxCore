@@ -44,7 +44,7 @@ md logs
 @rem build pxScene
 if "%DUKTAPE_SUPPORT%" == "ON" (
   echo "*********************** Enabling Duktape ***********************"
-  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  >> BUILD_LOGS
+  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  
   if "%ERRORLEVEL%" NEQ 0 (
     type BUILD_LOGS
     EXIT 1
@@ -53,13 +53,13 @@ if "%DUKTAPE_SUPPORT%" == "ON" (
 
 if "%DUKTAPE_SUPPORT%" == "OFF" (
   echo "*********************** Disabling Duktape ***********************"
-  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. >> BUILD_LOGS 
+  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. 
   if "%ERRORLEVEL%" NEQ 0 (
 	  type BUILD_LOGS
 	  EXIT 1
   )  	
 )
-cmake --build . --config Release -- /m >> BUILD_LOGS
+cmake --build . --config Release -- /m 
 if "%ERRORLEVEL%" NEQ 0 (
 	  type BUILD_LOGS
 	  EXIT 1
