@@ -22,7 +22,9 @@ set "BASE_DIR=%CD%"
 set "VSCMD_START_DIR=%CD%"
 call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat" x86
 
-set LOGS_DIR=%BASE_DIR%\logs
+set LOGS_DIR=%BASE_DIR%\build-win32\logs
+echo %LOGS_DIR%
+
 set BUILD_LOGS=%LOGS_DIR%\build_logs.txt
 @rem build dependencies
 cd examples/pxScene2d/external
@@ -37,25 +39,41 @@ set PATH=%PATH:c:\cygwin64\bin;=%
 cd "%BASE_DIR%"
 md build-win32
 cd build-win32
-
+md logs
 
 @rem build pxScene
 if "%DUKTAPE_SUPPORT%" == "ON" (
-    echo "*********************** Enabling Duktape ***********************"
-    cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  
+  echo "*********************** Enabling Duktape ***********************"
+  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  >> BUILD_LOGS
+  if "%ERRORLEVEL%" NEQ 0 (
+    type BUILD_LOGS
+    EXIT 1
+  )
 )
 
 if "%DUKTAPE_SUPPORT%" == "OFF" (
-echo "*********************** Disabling Duktape ***********************"
-    cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON ..  
+  echo "*********************** Disabling Duktape ***********************"
+  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. >> BUILD_LOGS 
+  if "%ERRORLEVEL%" NEQ 0 (
+	  type BUILD_LOGS
+	  EXIT 1
+  )  	
 )
-cmake --build . --config Release -- /m
+cmake --build . --config Release -- /m >> BUILD_LOGS
+if "%ERRORLEVEL%" NEQ 0 (
+	  type BUILD_LOGS
+	  EXIT 1
+)
+
 cpack .
+if "%ERRORLEVEL%" NEQ 0 (
+	  type BUILD_LOGS
+	  EXIT 1
+)
+
 
 @rem create standalone archive
 cd _CPack_Packages/win32/NSIS
 7z a -y pxscene-setup.zip pxscene-setup
-
-
 
 cd %ORIG_DIR%
