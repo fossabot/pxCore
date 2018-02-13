@@ -30,7 +30,7 @@ set BUILD_LOGS=%LOGS_DIR%\build_logs.txt
 @rem build dependencies
 cd examples/pxScene2d/external
 echo %BUILD_LOGS%
-ls %BUILD_LOGS%
+
 call buildWindows.bat  >> %BUILD_LOGS%
 
 @rem Avoid using link.exe from that paths
@@ -58,8 +58,11 @@ if "%DUKTAPE_SUPPORT%" == "OFF" (
 cmake --build . --config Release -- /m  >> %BUILD_LOGS%
 
 cpack .
-echo "********** cpack result : %ERRORLEVEL% **********"
-
+if %ERRORLEVEL% NEQ 0 (
+  echo "********** cpack result : %ERRORLEVEL% **********"
+  type %BUILD_LOGS%
+  EXIT 1
+)
 
 @rem create standalone archive
 cd _CPack_Packages/win32/NSIS
