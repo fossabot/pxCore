@@ -14,7 +14,7 @@ cd "build-win32/_CPack_Packages/win32/NSIS"
 
 set cronUpload=False
 
-if "%APPVEYOR_SCHEDULED_BUILD%" == "True" if "%APPVEYOR_REPO_BRANCH%" == "master" if "%DUKTAPE_SUPPORT%" == "ON" set cronUpload=True
+if "%APPVEYOR_SCHEDULED_BUILD%" == "True"  if "%DUKTAPE_SUPPORT%" == "ON" set cronUpload=True
 
 if %cronUpload% == "True" (
     7z a -y pxscene-setup-exe.zip pxscene-setup.exe 
@@ -23,7 +23,7 @@ if %cronUpload% == "True" (
       echo "-------------------------- Failed to upload pxscene setup"
 	  EXIT 1
     )
-    echo y | "C:\Program Files\PuTTY\pscp.exe" -i %S%\pxscene-build.pem.ppk -P 2220 %S%\build-win32\logs\build_logs.txt "ubuntu@96.116.56.119:/var/www/html/edge/windows"
+    echo y | "C:\Program Files\PuTTY\pscp.exe" -i %S%\pxscene-build.pem.ppk -P 2220 %S%\logs\build_logs.txt "ubuntu@96.116.56.119:/var/www/html/edge/windows"
     IF %ERRORLEVEL% NEQ 0 (
       echo "-------------------------- Failed to upload build logs"
     )
