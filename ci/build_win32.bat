@@ -22,12 +22,15 @@ set "BASE_DIR=%CD%"
 set "VSCMD_START_DIR=%CD%"
 call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat" x86
 
-set LOGS_DIR=%BASE_DIR%\build-win32\logs
+set LOGS_DIR=%BASE_DIR%\logs
 echo %LOGS_DIR%
+md logs
 
 set BUILD_LOGS=%LOGS_DIR%\build_logs.txt
 @rem build dependencies
 cd examples/pxScene2d/external
+echo %BUILD_LOGS%
+ls BUILD_LOGS
 call buildWindows.bat  >> BUILD_LOGS
 
 @rem Avoid using link.exe from that paths
@@ -39,41 +42,23 @@ set PATH=%PATH:c:\cygwin64\bin;=%
 cd "%BASE_DIR%"
 md build-win32
 cd build-win32
-md logs
+
 
 @rem build pxScene
 if "%DUKTAPE_SUPPORT%" == "ON" (
   echo "*********************** Enabling Duktape ***********************"
-  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  
-  if "%ERRORLEVEL%" NEQ 0 (
-    echo "************ cmake configuration failed ************"
-    type BUILD_LOGS
-    EXIT 1
-  )
+  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON .. >> BUILD_LOGS 
 )
 
 if "%DUKTAPE_SUPPORT%" == "OFF" (
   echo "*********************** Disabling Duktape ***********************"
-  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. 
-  if "%ERRORLEVEL%" NEQ 0 (
-	  echo "************ cmake configuration without duktape failed ************"
-	  type BUILD_LOGS
-	  EXIT 1
-  )  	
-)
-cmake --build . --config Release -- /m 
-if "%ERRORLEVEL%" NEQ 0 (
-	  echo "************ cmake failed ************"
-	  type BUILD_LOGS
-	  EXIT 1
+  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. >> BUILD_LOGS
 )
 
+cmake --build . --config Release -- /m  >> BUILD_LOGS
+
 cpack .
-if "%ERRORLEVEL%" NEQ 0 (
-      echo "************ cpack failed ************"
-	  type BUILD_LOGS
-	  EXIT 1
-)
+echo "********** cpack result : %ERRORLEVEL% **********"
 
 
 @rem create standalone archive
