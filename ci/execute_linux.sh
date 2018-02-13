@@ -183,20 +183,24 @@ fi
 #End
 
 # Check for valgrind memory leaks
-grep "definitely lost: 0 bytes in 0 blocks" $VALGRINDLOGS
-retVal=$?
-if [ "$retVal" -eq 0 ]
+
+if [ "$DUKTAPE_SUPPORT" = "ON" ]
 then
-  echo "************************* Valgrind reports success *************************";
-else
-  if [ "$TRAVIS_PULL_REQUEST" != "false" ]
-  then
-    errCause="Check the above logs"
-    cat $VALGRINDLOGS 
+  grep "definitely lost: 0 bytes in 0 blocks" $VALGRINDLOGS
+  retVal=$?
+  if [ "$retVal" -eq 0 ]
+    then
+    echo "************************* Valgrind reports success *************************";
   else
-    errCause="Check the file $VALGRINDLOGS and see for definitely lost count"
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]
+    then
+      errCause="Check the above logs"
+      cat $VALGRINDLOGS 
+    else
+      errCause="Check the file $VALGRINDLOGS and see for definitely lost count"
+    fi
+    checkError $retVal "Valgrind execution reported memory leaks" "$errCause" "Follow the steps locally : export ENABLE_VALGRIND=1;export SUPPRESSIONS=<pxcore dir>/ci/leak.supp;./pxscene.sh $TESTRUNNERURL?tests=<pxcore dir>/tests/pxScene2d/testRunner/tests.json and fix the leaks"
+    exit 1;
   fi
-  checkError $retVal "Valgrind execution reported memory leaks" "$errCause" "Follow the steps locally : export ENABLE_VALGRIND=1;export SUPPRESSIONS=<pxcore dir>/ci/leak.supp;./pxscene.sh $TESTRUNNERURL?tests=<pxcore dir>/tests/pxScene2d/testRunner/tests.json and fix the leaks"
-  exit 1;
+  exit 0;
 fi
-exit 0;
