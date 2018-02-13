@@ -13,6 +13,10 @@ printf  "\n\n************** "$2" failed *******************\n\n"
 fi
 }
 
+if [ "$TRAVIS_EVENT_TYPE" = "cron" ] || if [ "$TRAVIS_EVENT_TYPE" = "api" ] ; then
+exit 0;
+fi
+
 sh $TRAVIS_BUILD_DIR/ci/duktape_install.sh
 validateExe "$?" "duktape_install.sh"
 
