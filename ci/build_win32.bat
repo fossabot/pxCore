@@ -30,7 +30,7 @@ set BUILD_LOGS=%LOGS_DIR%\build_logs.txt
 @rem build dependencies
 cd examples/pxScene2d/external
 echo %BUILD_LOGS%
-
+echo "*********************** Building externals ***********************"
 call buildWindows.bat  >> %BUILD_LOGS%
 
 @rem Avoid using link.exe from that paths
@@ -45,16 +45,11 @@ cd build-win32
 
 
 @rem build pxScene
-if "%DUKTAPE_SUPPORT%" == "ON" (
-  echo "*********************** Enabling Duktape ***********************"
-  cmake  -DCMAKE_VERBOSE_MAKEFILE=ON .. >> %BUILD_LOGS% 
-)
 
-if "%DUKTAPE_SUPPORT%" == "OFF" (
-  echo "*********************** Disabling Duktape ***********************"
-  cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. >> %BUILD_LOGS%
-)
+echo "*********************** Configuring cmake ***********************"
+cmake  -DCMAKE_VERBOSE_MAKEFILE=ON .. >> %BUILD_LOGS% 
 
+echo "*********************** Building cmake ***********************"
 cmake --build . --config Release -- /m  >> %BUILD_LOGS%
 
 cpack .
