@@ -46,6 +46,7 @@ if "%DUKTAPE_SUPPORT%" == "ON" (
   echo "*********************** Enabling Duktape ***********************"
   cmake  -DCMAKE_VERBOSE_MAKEFILE=ON ..  
   if "%ERRORLEVEL%" NEQ 0 (
+    echo "************ cmake configuration failed ************"
     type BUILD_LOGS
     EXIT 1
   )
@@ -55,18 +56,21 @@ if "%DUKTAPE_SUPPORT%" == "OFF" (
   echo "*********************** Disabling Duktape ***********************"
   cmake -DSUPPORT_DUKTAPE=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .. 
   if "%ERRORLEVEL%" NEQ 0 (
+	  echo "************ cmake configuration without duktape failed ************"
 	  type BUILD_LOGS
 	  EXIT 1
   )  	
 )
 cmake --build . --config Release -- /m 
 if "%ERRORLEVEL%" NEQ 0 (
+	  echo "************ cmake failed ************"
 	  type BUILD_LOGS
 	  EXIT 1
 )
 
 cpack .
 if "%ERRORLEVEL%" NEQ 0 (
+      echo "************ cpack failed ************"
 	  type BUILD_LOGS
 	  EXIT 1
 )
