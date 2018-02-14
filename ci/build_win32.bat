@@ -24,7 +24,7 @@ call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary
 
 cd C:\Qt
 echo "!!!!!!!!!!!!!! %CD% == %ERRORLEVEL% !!!!!!!!!!!!!!!!!!!!!!"
-dir *opengl*.* /s
+dir *opengl*.libs /s
 
 cd %BASE_DIR%
 @rem build dependencies
