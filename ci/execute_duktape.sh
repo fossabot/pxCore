@@ -13,7 +13,7 @@ printf  "\n\n************** "$2" failed *******************\n\n"
 fi
 }
 
-if [ "$TRAVIS_EVENT_TYPE" = "cron" ] || if [ "$TRAVIS_EVENT_TYPE" = "api" ] ; then
+if ( [ "$TRAVIS_EVENT_TYPE" = "cron" ] || [ "$TRAVIS_EVENT_TYPE" = "api" ] ) ; then
 exit 0;
 fi
 
@@ -23,8 +23,6 @@ validateExe "$?" "duktape_install.sh"
 sh $TRAVIS_BUILD_DIR/ci/script.sh
 validateExe "$?" "script.sh"
 
-if false ;
-then
 
 if ( [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request" ] ) && [ "DUKTAPE_SUPPORT" != "ON" ] ; then 
   codecov --build "$TRAVIS_OS_NAME-$TRAVIS_COMMIT-$TRAVIS_BUILD_NUMBER" -X gcov -f $TRAVIS_BUILD_DIR/tracefile ; 
@@ -34,9 +32,6 @@ if ( [ "$TRAVIS_EVENT_TYPE" = "push" ] || [ "$TRAVIS_EVENT_TYPE" = "pull_request
   genhtml -o $TRAVIS_BUILD_DIR/logs/codecoverage $TRAVIS_BUILD_DIR/tracefile;
 fi
 
-fi
 
 sh $TRAVIS_BUILD_DIR/ci/after_script.sh
 validateExe "$?" "after_script.sh"
-
-
