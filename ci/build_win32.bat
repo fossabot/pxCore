@@ -22,11 +22,8 @@ set "BASE_DIR=%CD%"
 set "VSCMD_START_DIR=%CD%"
 call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat" x86
 
-cd C:\Qt\5.4\msvc2013_opengl
-tree
-
-cd C:\Qt\5.4\msvc2013_64_opengl
-tree
+cd C:\Qt\5.4\
+dir *opengl*.* /s
 
 cd %BASE_DIR%
 @rem build dependencies
