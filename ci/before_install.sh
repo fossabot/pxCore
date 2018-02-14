@@ -44,6 +44,8 @@ if [ "$TRAVIS_OS_NAME" = "osx" ] ;
 then
   brew update;
   cmake --version
+  brew info cmake
+  brew switch cmake 0
   #brew upgrade cmake;
   brew install quilt
   sudo /usr/sbin/DevToolsSecurity --enable
